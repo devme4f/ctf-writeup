@@ -1,6 +1,6 @@
 # Knight CTF - Sometime you need to look wayback
 
-View source-code, we found a comment, which is a link to the github source-code of the web app:
+Viewing source-code, we found a comment, which is a link to the github source-code of the web app:
 ```
 Test Bot Source Code: https://github.com/KCTF202x/repo101
 ```
