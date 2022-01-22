@@ -5,6 +5,8 @@
 # for i :=2 to n
 # if max < a1 then max := ai
 # {max is the largest element}
+
+# Chua giai duoc!!
 import time
 
 start = time.time()
