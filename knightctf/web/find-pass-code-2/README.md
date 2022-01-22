@@ -1,6 +1,6 @@
 #  Knight - Find Pass Code - 2
 
-View the source-code, we found a comment: 
+Viewing the source-code, we found a comment: 
 ```
 Hi Serafin, I think you already know how you can view the source code :P 
 ```
