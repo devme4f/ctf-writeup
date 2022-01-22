@@ -1,6 +1,6 @@
 # Kinght CTF - Find Pass Code - 1
 
-View source-code, we found a comment:
+Viewing source-code, we found a comment:
 ```
 Hi Serafin, I learned something new today. 
 I build this website for you to verify our KnightCTF 2022 pass code. You can view the source code by sending the source param
