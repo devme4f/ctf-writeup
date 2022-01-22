@@ -1,12 +1,12 @@
 #  Knight - Find Pass Code - 2
 
-Inspect html source-code: 
-<!-- Hi Serafin, I think you already know how you can view the source code :P -->
+View the source-code: 
+```
+Hi Serafin, I think you already know how you can view the source code :P 
+```
 
-credentials found: Serafin
-Nothing inmportant about Serafin, just reference to version 1
-
-source-code: https://find-pass-code-two.kshackzone.com/?source
+**Credentials found**: Serafin
+Nothing important about Serafin, just reference to version 1, let's view the source-code by addming `source` parameter to GET requests just like version 1: `https://find-pass-code-two.kshackzone.com/?source`
 ```php
 <?php
 require "flag.php";
@@ -34,14 +34,13 @@ if (isset($_GET["source"])) {
 ?>
 ```
 
-Magic hash: https://github.com/spaze/hashes/blob/master/md5.md
+**Magic hash**: `https://github.com/spaze/hashes/blob/master/md5.md`
 	
 	0e215962017:0e291242476940776845150308577824 --> is an old passcode
 
-Ok, now i know running with print is extreamly slow
-range(1000000) and calculation without print only take like 5s and with print is take like a long time!
+Ok, now i know running with print is extreamly slow, python range(1000000) with calculation without print only take like 5s and with print is take like *a long time!*
 
-based on the last old_pass_code, we start at: 807097111
+Based on the last old_pass_code, we start brute-forcing at: `807097111`
 ```python
 import hashlib
 
@@ -53,6 +52,6 @@ for i in range(807097111, 1500000000):
 		break
 
 ```
-**[FOUND]** - 0e1137126905 : 0e291659922323405260514745084877
+**[FOUND]**: `0e1137126905 : 0e291659922323405260514745084877`
 
-**flag**: KCTF{ShOuD_wE_cOmPaRe_MD5_LiKe_ThAt__Be_SmArT}
+**flag**: `KCTF{ShOuD_wE_cOmPaRe_MD5_LiKe_ThAt__Be_SmArT}`
