@@ -35,7 +35,7 @@ int main() {
 // flag: KCTF{b451c_pr06r4mm1ng}
 
 
-// Slove by test output
+// Solved by enumerate output and reverse it back to write C code(which is hen/xui)
 /*
 Write step loop --> reverse it back step by step --> convert it to C code
 i j
