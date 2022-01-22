@@ -29,7 +29,7 @@ About XOR algorithm: XOR is OR operation, (1 ^ 1 = 0 ; 0 ^ 0 = 0), (1 ^ 0 = 1), 
 	--------
 	00000011
 
-When we XOR two string, characters will sequence XOR each other(abcd^abcd), but when one longer than other: ab ^ abababa
+When we XOR two string, characters will sequence XOR each other(abcd^abcd), but when one longer than the other: ab ^ abababa
 
 `tool`: generate_xor.py
 ```python
