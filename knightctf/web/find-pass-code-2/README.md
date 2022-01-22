@@ -1,6 +1,6 @@
 #  Knight - Find Pass Code - 2
 
-View the source-code: 
+View the source-code, we found a comment: 
 ```
 Hi Serafin, I think you already know how you can view the source code :P 
 ```
@@ -33,13 +33,13 @@ if (isset($_GET["source"])) {
 
 ?>
 ```
+Basiclly this is PHP loose comparion + MD5 hash to 0e123(equal to 0), if you're not already know, go research!
 
 **Magic hash**: `https://github.com/spaze/hashes/blob/master/md5.md`
 	
 	0e215962017:0e291242476940776845150308577824 --> is an old passcode
 
 Ok, now i know running with print is extreamly slow, python range(1000000) with calculation without print only take like 5s and with print is take like *a long time!*
-
 Based on the last old_pass_code, we start brute-forcing at: `807097111`
 ```python
 import hashlib
