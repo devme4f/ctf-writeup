@@ -1,9 +1,10 @@
 # Kinght CTF - Find Pass Code - 1
 
 Inspect html code, we can see a comment:
-<!-- Hi Serafin, I learned something new today. 
+```
+Hi Serafin, I learned something new today. 
 I build this website for you to verify our KnightCTF 2022 pass code. You can view the source code by sending the source param
--->
+```
 Ok, let's try that:
 path: http://159.223.166.39:9000/?source=
 ```php
