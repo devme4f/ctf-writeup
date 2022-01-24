@@ -27,11 +27,9 @@ The idea very is very clear, if we can read php session file, we can using `name
 *References*:
 First check the value of `session.save_path` using `ini_get('session.save_path')` or `phpinfo()`. If that is non-empty, then it will show where the session files are saved. In many scenarios `it is empty by default`, in which case read on:
 
-On `Ubuntu or Debian` machines, if `session.save_path is not set`, then session files are saved in `/var/lib/php5`.
-
-On `RHEL and CentOS` systems, if `session.save_path is not set`, session files will be saved in `/var/lib/php/session`
-
-I think that if you `compile PHP from source`, then when `session.save_path is not set`, session files will be saved in `/tmp`.
+  On `Ubuntu or Debian` machines, if `session.save_path is not set`, then session files are saved in `/var/lib/php5`.
+  On `RHEL and CentOS` systems, if `session.save_path is not set`, session files will be saved in `/var/lib/php/session`
+  I think that if you `compile PHP from source`, then when `session.save_path is not set`, session files will be saved in `/tmp`.
 
 And yes, your php session file location is: 
 ```
