@@ -35,7 +35,7 @@ I think that if you `compile PHP from source`, then when `session.save_path is n
 
 And yes, your php session file location is: 
 ```
-/tmp/_sess[YOUR-PHP-SESSION-ID]
+/tmp/sess_[YOUR-PHP-SESSION-ID]
 ```
 
 **Try**: `http://rce-me.ctf.actvn.edu.vn/?l=/tmp/sess_sd8vma27g1tuo0e6e1v7e18jj1`
