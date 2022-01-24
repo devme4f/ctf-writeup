@@ -39,3 +39,10 @@ Ok, merge it together: `flahga123456789xxsxx012xxxxxxxxx34567xx1`, we got the ta
 Same with column and flag using column_name from information_schema.tables --> select column_name from flahga123456789xxsxx012xxxxxxxxx34567xx1....
 
 **flag**: `KMACTF{X_Ooooooooooooorder_By_Noooooooooooooooooooone_SQLMaaaaaaaaaaaap?!!!!!!!!!!!!}`
+
+**Góc than thở**:
+```
+Mình chỉ cặm cụi với extractvalue(), mặc dù nó không sai nhưng chỉ biết thay đổi main query mà không thay đổi cấu trúc syntax toàn câu lệnh. Mặc dù đây là error based nhưng không có nghĩa nó sẽ trả về error của error mà chỉ là kết quả lệnh đó, nếu không sẽ chỉ trả về NULL. Mình cần stick với challenge lâu hơn và thử tất cả, điều chỉnh tỉ mỉ từng query cho đến khi bế tắc thay vì nhảy cóc và 'cho rằng' nên không thử. 
+
+Hàm extractvalue ở payload all the things nó dùng random() để gây lỗi, nhưng ta chỉ cần số 0 là có thể gây lỗi rồi trong khi random có thể  bị block hay raise error, phải try everything. Haiz!!
+```
