@@ -53,6 +53,7 @@ smbclient \\\\$IP\\backups
 ```bash
 git clone https://github.com/SecureAuthCorp/impacket.git /opt/impacket && cd /opt/impacket
 sudo docker build . -t impacket
+sudo docker run -it impacket #? /bin/bash
 # .....
 
 # Using mssqlclient from impacket to connect to Microsoft SQL Server
