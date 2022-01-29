@@ -43,6 +43,7 @@ Login as guest --> account --> ?content=accounts&id=2 is [2233]guest--> ?content
 
 Change cookies from user=2233 && role=guest to user=34322 && role=admin --> *ADMIN HERE!!*
 
+## Remote Control Execution
 Upload `php-reverse-shell.php` --> trigger by `/uploads/php-reverse-shell.php` --> *reverse shell here!!*
 
 Oldy upgrade normal shell to interactive shell!!
