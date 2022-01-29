@@ -39,11 +39,11 @@ Duh!! try using crawler from Burp-Suite to build Site-Map(listening all traffic 
 
 Login as guest --> uploads --> This action require super admin 
 
-Login as guest --> account --> ?content=accounts&id=2 = [2233]guest--> ?content=accounts&id=1 --> [34322]admin
+Login as guest --> account --> ?content=accounts&id=2 is [2233]guest--> ?content=accounts&id=1 is [34322]admin
 
-Check cookies --> user=2233 && role=guest--> user=34322 && role=admin --> *ADMIN HERE!!*
+Change cookies from user=2233 && role=guest to user=34322 && role=admin --> *ADMIN HERE!!*
 
-Upload php-reverse-shell.php --> trigger by `/uploads/php-reverse-shell.php` --> *reverse shell here!!*
+Upload `php-reverse-shell.php` --> trigger by `/uploads/php-reverse-shell.php` --> *reverse shell here!!*
 
 Oldy upgrade normal shell to interactive shell!!
 ```bash
