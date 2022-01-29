@@ -56,7 +56,7 @@ export TERM=xterm-256color
 stty rows 40 columns 173
 export SHELL=bash
 ```
-
+## Privilege Escalation
 From `/var/www/html/cdn-cgi/login/db.php`:
 ```php
 <?php
