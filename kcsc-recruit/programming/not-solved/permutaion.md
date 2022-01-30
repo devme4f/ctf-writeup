@@ -21,7 +21,7 @@ S = loK8Xaiuq98SKgWkl2Hx9sicEfOAOxzfNRfv5lsYpKXkeJmqHsYdQw8WhB9EMyn8
 How many different strings can be generated from string S?
 answer = 
 ```
-**Refrences**: https://vnhoctap.com/hoan-vi-lap/ 
+**Refrences**: `https://vnhoctap.com/hoan-vi-lap/`
 
 **Ờ, trông dễ thế sao \*\*\* giải được**: Trước nay mình chỉ dùng python để viết tool web exploit, mặc dù đã giải ra gần đúng kết quả với sai số nhưng không 1 lần để ý thử làm tròn số trong python mà ép về *interger* bằng `int()`. Để làm tròn số khi chia ta dùng `floor division`.
 
