@@ -17,7 +17,7 @@ arr = [52, 31, 31, 60, 12, 8, 39, 56, 62, 2, 12, 19, 29, 44, 30, 44]
 answer = 
 ```
 
-Đề cho 1 array và answer, answer số to thế chắc là array nhân nhau thử thì đúng thế thật.
+Đề cho 1 array và answer, answer số to thế chắc là phần tử array nhân nhau, thử thì đúng thế thật.
 
 **Code**:
 
