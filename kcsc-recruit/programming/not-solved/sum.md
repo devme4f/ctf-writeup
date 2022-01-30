@@ -24,6 +24,7 @@ Target = 122
 Answer = 
 ```
 Sử dụng two pointer techniques. Đề hint thế rồi vẫn không làm được thì ... [:(]
+**Refrences**: `https://algodaily.com/lessons/using-the-two-pointer-technique`
 
 **Code**:
 ```python
@@ -34,7 +35,6 @@ port = 9005
 
 # Sắp xếp mảng rồi cộng từ hai đầu(l >-< r) vào -> không sợ lặp
 # Lấy được pair rút l và r(ko xài lại), bé hơn rút l else rút r
-# two pointer techniques như hint đề bài nhưng research không đủ đâu: https://algodaily.com/lessons/using-the-two-pointer-technique
 def solve(Nums, target):
     l = 0
     r = len(Nums) - 1
