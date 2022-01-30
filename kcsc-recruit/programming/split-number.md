@@ -14,7 +14,7 @@ ciphertext = 7111111611697321099710710132121111117321171101001011141151169711010
 plaintext = 
 ```
 
-Nhìn mắt thường chả ra octal cũng chả phải hex, từ tên đề bài là *split* rồi nhìn kĩ mỡi thấy chỉ là `ascii numeber` viết liền nhau, tách ra thử thì đúng thật. Mình cho rằng các chữ cái cũng sẽ chỉ thuộc khoảng 32(space) đến 126(~) thế nên khi tách, lấy khoảng 2 số cho đủ lớn hơn 32, chưa đủ lấy đến 3 số.
+Nhìn mắt thường chả ra octal cũng chả phải hex, từ tên đề bài là *split* rồi nhìn kĩ mỡi thấy chỉ là `ascii number` viết liền nhau, tách ra thử thì đúng thật. Mình cho rằng các chữ cái cũng sẽ chỉ thuộc khoảng 32(space) đến 126(~) thế nên khi tách, lấy khoảng 2 số cho đủ lớn hơn 32, chưa đủ lấy đến 3 số.
 
 **Code**:
 ```python
