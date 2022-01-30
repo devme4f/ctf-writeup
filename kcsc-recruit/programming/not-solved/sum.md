@@ -24,6 +24,7 @@ Target = 122
 Answer = 
 ```
 Sử dụng two pointer techniques. Đề hint thế rồi vẫn không làm được thì ... [:(]
+
 **Refrences**: `https://algodaily.com/lessons/using-the-two-pointer-technique`
 
 **Code**:
