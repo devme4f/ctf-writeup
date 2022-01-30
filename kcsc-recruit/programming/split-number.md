@@ -26,8 +26,6 @@ port = 9003
 def decrypt(cipher):
 	sequences = []
 	plain = ''
-	tmp = ''
-	i = 0
 	c = ''
 
 	for i in range(len(cipher)):
