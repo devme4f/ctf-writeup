@@ -23,7 +23,7 @@ answer =
 ```
 **Refrences**: `https://vnhoctap.com/hoan-vi-lap/`
 
-**Ờ, trông dễ thế sao \*\*\* giải được**: Trước nay mình chỉ dùng python để viết tool web exploit, mặc dù đã giải ra gần đúng kết quả với sai số nhưng không 1 lần để ý thử làm tròn số trong python mà ép về *interger* bằng `int()`. Để làm tròn số khi chia ta dùng `floor division`.
+**Ờ, trông dễ thế sao \*\*o giải được**: Trước nay mình chỉ dùng python để viết tool web exploit, mặc dù đã giải ra gần đúng kết quả với sai số nhưng không 1 lần để ý thử làm tròn số trong python mà ép về *interger* bằng `int()`. Để làm tròn số khi chia ta dùng `floor division(//)`.
 
 Lý do hay đó, thôi im lặng đưa code đây!
 
