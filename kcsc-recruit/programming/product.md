@@ -51,6 +51,7 @@ staged = prepare(tmp[4])
 level = str(cal(staged)).encode()
 s.sendline(level)
 
+# Lấy đề bài lỗi thì chắc flag về rồi!
 try:
     while 1:
         tmp = s.recvlines(2)
