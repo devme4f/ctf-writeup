@@ -19,7 +19,7 @@ Trigger thành công, build payload thôi!
 
 Thử query `information_schema` mà không được, có lẽ dính `blacklist
 `
-Trước nay cứ tưởng `table name, column, database` trong SQL mặc định case-sensitive nhưng thật  phụ thuộc cấu hình, đúng hơn thì `(Đối với MySQL)Database and table names are not case sensitive in Windows, and case sensitive in most varieties of Unix or Linux`. Thử thôi.
+Trước nay cứ tưởng `table name, column, database` trong SQL mặc định là case-sensitive nhưng thật ra là phụ thuộc cofiguration, từng loại DBMS và cả hệ điều hành. Thử thôi.
 
 Viết hoa `INFORmation_schema` rồi query thì bypass được thật.
 ![INFORmation_schema](5.png)
