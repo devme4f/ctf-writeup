@@ -12,7 +12,7 @@ Không giải được bài này là do giai đoạn enumeration chưa tới. H�
 Inject bằng `single quote` chẳng có tiến triển gì, đây có lẽ là hố đen khiến nhiều người thiếu kiên nhẫn bỏ cuộc.
 ![single quote](2.png)
 Thử sang `double quote`
-![double quote](3.png)
+![double quote](3-1.png)
 Để bypass có thể thử `oORr` nhưng không được, có lẽ replace null là `null` chứ không phải xóa đi, đơn giản chỉ cần viết hoa, sql `case-sensitive` khá thoải mái.
 ![double quote trigger](4.png)
 Trigger thành công, build payload thôi!
