@@ -73,6 +73,7 @@ Web app: 1 page login -> only admin see flag, another look like vulnerable to LF
 
 http://45.77.39.59/?page=secret
 
+Thử trigger LFI đọc `/etc/passwd` file:
 ```
 Warning: include(/etc/passwd.php): Failed to open stream: No such file or directory in /var/www/html/index.php on line 14
 
