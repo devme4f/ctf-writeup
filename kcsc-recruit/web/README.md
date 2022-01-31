@@ -128,7 +128,7 @@ Add extension --> `null byte` --> *yes!!*
   }
 ?>
 ```
-Trông dễ ăn đó, với user_hash thì encrypt interger to 0e(0 mũ = 0) là bypass được --> `0e1137126905:0e291659922323405260514745084877`
+Trông dễ ăn đó, với user_hash thì md5 hash interger to 0e(0 mũ = 0) là bypass được --> `0e1137126905:0e291659922323405260514745084877`
 
 Hàm extract() extract any variable in POST array. Và nó được gọi sau `$password` variable tức mình có thể ghi đè!!
 
