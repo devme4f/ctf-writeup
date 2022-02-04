@@ -33,9 +33,7 @@ ddef00dfaf0fc11d ed05777122bec5c5
 
 AAAAAAAAAAAAAAAs cretkeyPPPPPPPPP
 
-               ^
-               
-        brute-force this!! --> so sánh với block trước
+brute-force từng byte bị dích về block này!! --> so sánh với block trước
 
 **Tool exploit**:
 ```python
