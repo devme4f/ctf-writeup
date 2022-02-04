@@ -29,7 +29,7 @@ params = {
 ddef00dfaf0fc11d ed05777122bec5c5
 5fec0e7366a611d0 6db4ea75b91cedc3
 ```
-**References**: https://zachgrace.com/posts/attacking-ecb/
+**Reference**: https://zachgrace.com/posts/attacking-ecb/
 
 AAAAAAAAAAAAAAAs cretkeyPPPPPPPPP
 
