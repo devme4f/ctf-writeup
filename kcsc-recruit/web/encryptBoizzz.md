@@ -31,8 +31,6 @@ ddef00dfaf0fc11d ed05777122bec5c5
 ```
 **References**: https://zachgrace.com/posts/attacking-ecb/
 
-1234567891234567 1234567891234567
-
 AAAAAAAAAAAAAAAs cretkeyPPPPPPPPP
                ^
         brute-force this!! --> so sánh với block trước
