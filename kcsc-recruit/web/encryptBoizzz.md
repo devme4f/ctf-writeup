@@ -33,6 +33,7 @@ ddef00dfaf0fc11d ed05777122bec5c5
 
 AAAAAAAAAAAAAAAs cretkeyPPPPPPPPP
                ^
+               
         brute-force this!! --> so sánh với block trước
 
 **Tool exploit**:
