@@ -48,7 +48,7 @@ Challenge lụm flag
 
 ## DIOR
 
-Viết láy của `IDOR - Insecure direct object references`: arises when an application `uses user-supplied input` to access objects `directly`.
+Viết láy của `IDOR - Insecure direct object reference`: arises when an application `uses user-supplied input` to access objects `directly`.
 
 ![any](idor.png)
 
