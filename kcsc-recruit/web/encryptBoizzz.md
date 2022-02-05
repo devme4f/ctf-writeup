@@ -8,7 +8,7 @@ IP
 **Author**: `nhienit`
 
 # Solution
-Nguồn: https://github.com/d47sec/CTF-Writeups/tree/main/EnCryptBoizzz mình viết lại nhằm mục đích cá nhân là note các ý mình chưa hiểu, lưu trữ và ghi nhớ.
+Nguồn: https://github.com/d47sec/CTF-Writeups/tree/main/EnCryptBoizzz
 
 At 3 bytes tang 1 block
 
