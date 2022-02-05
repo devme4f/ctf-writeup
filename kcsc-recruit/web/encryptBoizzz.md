@@ -36,7 +36,7 @@ AAAAAAAAAAAAAAAs
                ^brute-force!! byte nay
 AAAAAAAAAAAAAAAs cretkeyPPPPPPPPP
 
-AAAAAAAAAAAAAAsb
+AAAAAAAAAAAAAAsc
                ^brute-force!! byte nay
 AAAAAAAAAAAAAAsc retkeyPPPPPPPPPP
 ```
