@@ -22,18 +22,24 @@ params = {
 ```
 `result`:
 ```
+5673760b1cc65c365e93fa8f4317a2c4
+16 bytes A encrypted in hex(32 characters)
 5673760b1cc65c36 5e93fa8f4317a2c4
-16 bytes 'A'    | auth_key + padding    
-5673760b1cc65c36 5e93fa8f4317a2c4
-16 bytes 'A'    | auth_key + padding
+16 bytes A encrypted in hex
 ddef00dfaf0fc11d ed05777122bec5c5
 5fec0e7366a611d0 6db4ea75b91cedc3
+n bytes encrypted auth_key
 ```
 **Reference**: https://zachgrace.com/posts/attacking-ecb/
-
+```
+AAAAAAAAAAAAAAAs
+               ^brute-force!! byte nay
 AAAAAAAAAAAAAAAs cretkeyPPPPPPPPP
 
-brute-force từng byte bị dích về block này!! --> so sánh với block trước
+AAAAAAAAAAAAAAsb
+               ^brute-force!! byte nay
+AAAAAAAAAAAAAAsc cretkeyPPPPPPPPP
+```
 
 **Tool exploit**:
 ```python
@@ -57,7 +63,7 @@ def check():
     r = s.get(url, cookies=cookies, params=params)
     cipher = re.findall('"(.*)"', r.text)[0] # capture group(return)
 
-    return cipher[:16] == cipher[32:48]
+    return cipher[:32] == cipher[32:64]
 
 auth_key = ''
 for i in range(15, -1, -1):
