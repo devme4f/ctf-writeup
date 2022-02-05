@@ -42,11 +42,12 @@ Ok Log4j, Unifi network vulnerability: https://www.sprocketsecurity.com/blog/ano
 Automate log4j vulnerabilities in unifi software: https://github.com/puzzlepeaches/Log4jUnifi 
 
 **Summary**:
+
 The `Unifi Network Application` is used to `manage Ubiquiti software and hardware solutions`. This software suite can be installed natively on Linux and Windows or within a Linux Docker container. 
 
 The application is most commonly hosted on `port 8443` via HTTPS. Navigating to the webpage for the application in a web browser will look something like the following:
 
-!(unifi login version)[Log4Unifi_1_Login_Version.png]
+![unifi login version](Log4Unifi_1_Login_Version.png)
 
 Versions prior to 6.5.54 are vulnerable to remote code execution. Once you’ve identified a vulnerable instance, it’s simple to walk through exploitation.
 
@@ -164,7 +165,7 @@ db.admin.update( { name: "administrator" }, {$set: { x_shadow: "$6$CU3a0DfD5u.Qe
 
 Back to the Controller Login Pannel, log in with: `administrator:hello`
 
-!(ssh root password)[ssh-password.png]
+![ssh root password](ssh-password.png)
 
 **SSH root password**: `NotACrackablePassword4U2022`
 ```bash
