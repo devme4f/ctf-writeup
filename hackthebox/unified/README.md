@@ -153,7 +153,8 @@ What is the function to add data to the database in MongoDB: `db.admin.insert()`
 What is the function we use to update users within the database in MongoDB: `db.admin.update()`
 
 **hints**: It's not crackable
-https://community.spiceworks.com/topic/2175763-hash-tool-to-reset-ubiquiti-unifi-controller-admin-password
+
+**Reference**: https://community.spiceworks.com/topic/2175763-hash-tool-to-reset-ubiquiti-unifi-controller-admin-password
 ```bash
 # http://sha512crypt.pw/
 # hash: hello -> $6$CU3a0DfD5u.QeV12$5NWCSeU4SsCxabV9bSNotwhoacGVqCfT1Lf9KVFIyc8XvW.N4OE9Hl.j1NGxjPeyHEL1/E8lbD5XNHBwFjrSn.
@@ -167,10 +168,10 @@ Back to the Controller Login Pannel, log in with: `administrator:hello`
 
 ![ssh root password](ssh-password.png)
 
-**SSH root password**: `NotACrackablePassword4U2022`
+**SSH root password**: `NotACrackablePassword4XXXXX`
 ```bash
 ssh root@$IP
-# NotACrackablePassword4U2022
+# NotACrackablePassword4XXXXX
 ```
 
-**root flag**: `HTB{e50bc93c75b634e4b272d2f771c33681}`
+**root flag**: `HTB{e50bc93c75b634e4b272d2f771cXXXXX}`
