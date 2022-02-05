@@ -38,7 +38,7 @@ AAAAAAAAAAAAAAAs cretkeyPPPPPPPPP
 
 AAAAAAAAAAAAAAsb
                ^brute-force!! byte nay
-AAAAAAAAAAAAAAsc cretkeyPPPPPPPPP
+AAAAAAAAAAAAAAsc retkeyPPPPPPPPPP
 ```
 
 **Tool exploit**:
