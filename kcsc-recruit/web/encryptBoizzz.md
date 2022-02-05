@@ -24,11 +24,11 @@ params = {
 ```
 5673760b1cc65c365e93fa8f4317a2c4
 16 bytes A encrypted in hex(32 characters)
-5673760b1cc65c36 5e93fa8f4317a2c4
+5673760b1cc65c365e93fa8f4317a2c4
 16 bytes A encrypted in hex
-ddef00dfaf0fc11d ed05777122bec5c5
-5fec0e7366a611d0 6db4ea75b91cedc3
-n bytes encrypted auth_key
+ddef00dfaf0fc11ded05777122bec5c5
+5fec0e7366a611d06db4ea75b91cedc3
+32 bytes encrypted auth_key+padding in hex
 ```
 **Reference**: https://zachgrace.com/posts/attacking-ecb/
 ```
