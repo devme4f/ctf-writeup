@@ -45,7 +45,7 @@ sh _
 `_` file:
 ```bash
 cat _
-#_
+#_            error command/not command auto ignores
 #cat\
 # \
 #ind\
