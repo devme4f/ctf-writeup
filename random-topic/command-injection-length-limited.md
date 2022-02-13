@@ -45,7 +45,7 @@ sh _
 `_` file:
 ```bash
 cat _
-#_            error command/not command auto ignores
+#_            error command/not command raise error but still being ignored and keep running!!
 #cat\
 # \
 #ind\
