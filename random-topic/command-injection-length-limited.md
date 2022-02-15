@@ -12,6 +12,7 @@ If we can inject `cat *`, we could read all files in the directory but this comm
 
 ## Bypass black-listed
 **Search**: 
+
 php tricks hacktricks: https://book.hacktricks.xyz/pentesting/pentesting-web/php-tricks-esp
 
 bypass bash restrictiosn: https://book.hacktricks.xyz/linux-unix/useful-linux-commands/bypass-bash-restrictions
@@ -27,6 +28,7 @@ env
 ## Bypass using short command of cat
 
 **Search**: 
+
 Linux two letters command: https://www.davekb.com/browse_computer_tips:linux_two_letter_commands:txt
 
 ```bash
