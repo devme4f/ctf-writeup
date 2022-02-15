@@ -21,9 +21,14 @@ bypass bash restrictiosn: https://book.hacktricks.xyz/linux-unix/useful-linux-co
 'l's # flag.php, index.php
 l''s # still good
 p\s # processes
+env
 ```
 
 ## Bypass using short command of cat
+
+**Search**: 
+Linux two letters command: https://www.davekb.com/browse_computer_tips:linux_two_letter_commands:txt
+
 ```bash
 # using m4(same as cat)
 m4 *
