@@ -17,7 +17,7 @@ php tricks hacktricks: https://book.hacktricks.xyz/pentesting/pentesting-web/php
 
 bypass bash restrictiosn: https://book.hacktricks.xyz/linux-unix/useful-linux-commands/bypass-bash-restrictions
 
-**Bypassed
+**Bypassed**:
 ```
 'l's # flag.php, index.php
 l''s # still good
