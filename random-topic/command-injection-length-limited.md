@@ -10,7 +10,20 @@ if (strlen($_GET['start']) < 5){
 
 If we can inject `cat *`, we could read all files in the directory but this command has 5 characters so it's doesn't work.
 
-## Bypass
+## Bypass black-listed
+**Search**: 
+php tricks hacktricks: https://book.hacktricks.xyz/pentesting/pentesting-web/php-tricks-esp
+
+bypass bash restrictiosn: https://book.hacktricks.xyz/linux-unix/useful-linux-commands/bypass-bash-restrictions
+
+**Bypassed
+```
+'l's # flag.php, index.php
+l''s # still good
+p\s # processes
+```
+
+## Bypass using short command of cat
 ```bash
 # using m4(same as cat)
 m4 *
@@ -18,8 +31,7 @@ m4 *
 
 **flag**: `791b21ee6421993a8e25564227a816ee52e48edb437909cba7e1e80c0579b6be`
 
-
-## Extended
+## Extended to RCE
 
 **In bash, write file input from stdin**:
 ```bash
