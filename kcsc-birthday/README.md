@@ -73,7 +73,7 @@ for i in range(1,30):
   
   Khi query để ra username thì không sao nhưng đến `password` lại chẳng ra gì, thử nhiều mới nhớ ra đoạn `or` bị blacklist và replace mất nên cũng cần viết hoa nốt để bypass. MySQL(và phần lớn DBMS khác) cấu hình default là case-insensitive.
 
-  Mình định dùng `ASCII()` MySQL function cho quen và nhằm tránh ký tự đặc biệt nếu gặp đỡ escapce nhưng không được, không dùng cũng không sao, có lẽ mình đã nhầm ở đâu đó nhưng lười thử lại, đã có password rồi.
+  Mình định dùng `ASCII()` MySQL function cho quen và nhằm tránh ký tự đặc biệt nếu gặp đỡ escape nhưng không được, không dùng cũng không sao, có lẽ mình đã nhầm ở đâu đó nhưng lười thử lại, đã có password rồi.
 
 
 *Logged-in as admin*:
