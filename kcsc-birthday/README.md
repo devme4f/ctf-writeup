@@ -13,6 +13,7 @@ Cấu trúc web-server:
 ![tree](tree.png)
 
 **Tóm tắt**:
+
 `index.php`: Nhận `url` parameter và curl nó và chỉ trả về status là true | false.
 
 `admin/index.php`: Admin mới access được.
@@ -83,6 +84,7 @@ for i in range(1,30):
 ## Review Source-Code 2
 
 **Tóm Tắt**: 
+
 `admin/index.php`: Ok một bài `serialize`, nhận data variable ở cookie mà mình có thể kiếm soát và `unserialize` nó.
 ```php
 <?php 
