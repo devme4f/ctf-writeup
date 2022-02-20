@@ -1,6 +1,6 @@
 # Docker Escapes and Priviledge Escalation - HackTheBox University CTF "GoodGame"
 
-**Description**: Docker escapes via ssh, priv escala with mounted directory
+**Description**: Docker escapes via *ssh*, priv escala with *mounted directory*
 
 **RCE**: vulnerable to sql injection -> using sqlmap--> logged in as admin --> vulnerable SSTI -> using subprocess --> *RCE*
 
