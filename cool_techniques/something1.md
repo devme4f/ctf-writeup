@@ -22,7 +22,7 @@ ssh augustus@172.19.0.1
 ```bash
 cat /etc/password
 # Don't see augustus user
-# => Still have augustus home directory => This home directory is being mount into this docker container
+# => Still have augustus home directory => This home directory is being mounted into this docker container
 
 # Step to priv escala
 # Step 1: Back to host docker machine
