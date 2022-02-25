@@ -1,7 +1,7 @@
 # RCE khi upload file chỉ cho phép image extension
 **References**: https://onestepcode.com/injecting-php-code-to-jpg/
 
-1. Inject php code vào meta information của image, save as image.jpg
+1. Inject php code vào meta information của image, save as file.jpg
 
 *Tools*: exiftool, jhead,..
 
