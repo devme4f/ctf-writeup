@@ -43,7 +43,7 @@ class WakyWaky {
     }
 }
 
-// Mục tiêu: gọi __toString ở class WakyWaky để $getflag = true; rồi tạo object getMessage mà không trigger điều kiện block ở construct
+// Mục tiêu: gọi __toString ở class WakyWaky để $getflag = true; rồi tạo object getMessage mà không trigger die ở construct
 
 $mess = new GetMessage('a');
 $mess->receive = 'HelloBooooooy'; // thỏa mãn điều kiện lấy flag ở __destruct()
