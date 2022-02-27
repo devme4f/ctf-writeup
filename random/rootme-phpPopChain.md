@@ -54,10 +54,10 @@ $pad_wak->msg = $mess; // gán recieve property của obj này là 1 object GetM
 $wak = new WakyWaky();
 $wak->msg = $pad_wak; // gọi toString ở WakyWaky
 
-$a = serialize($wak); // gọi __wakeUp()
+$a = serialize($wak);
 echo $a . "\n\n";
 
-unserialize($a);
+unserialize($a); // gọi __wakeUp()
 ```
 
 **secret**: `uns3r14liz3_XXXXX_XXXXX_XXXXX`
