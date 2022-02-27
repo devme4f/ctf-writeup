@@ -57,3 +57,5 @@ echo $a . "\n\n";
 
 unserialize($a);
 ```
+
+**secret**: `uns3r14liz3_XXXXX_XXXXX_XXXXX`
