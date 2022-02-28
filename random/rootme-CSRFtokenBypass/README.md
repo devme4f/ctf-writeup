@@ -4,7 +4,8 @@ Sau khi `register` trang web có phần `Private` chứa flag, tuy nhiên để 
 
 ![validated form](validate.png)
 
-Ta cần submit form này để có thể validate tuy nhiên chỉ admin mới có quyền.
+Ta cần submit form này để có thể validate tuy nhiên chỉ admin mới có quyền, ngoài ra form này dùng csrf token `Single per-page nonce` tức mỗi request check csrf token khác nhau, phải trộm được token này.
+
 
 Trang web có tính năng `contact`, thử trigger xss request đến `webhook endpoint` thì đúng dính thật.
 
