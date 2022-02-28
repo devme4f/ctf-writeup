@@ -8,7 +8,7 @@ Ta cần submit form này để có thể validate tuy nhiên chỉ admin mới 
 
 Trang web có tính năng `contact`, thử trigger xss request đến `webhook endpoint` thì đúng dính thật.
 
-![contact form](xss-contact.pnt)
+![contact form](xss-contact.png)
 
 **Payload**: trigger
 ```html
