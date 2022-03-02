@@ -43,14 +43,14 @@ if (isset($_GET['auth_key'])) {
 
 **Review source-code**:  
 
-1. Chương trình lấy `name parameter` mà ta cung cấp, nối với `$auth_key` rồi encrypt bằng thuật toán `ECB`(Electronic Code Block) và convert sang hexdecimal rồi gán cho session. 
+1. Chương trình lấy `name parameter` mà ta cung cấp, nối với `$auth_key` rồi encrypt với method `AES-128-ECB`(Electronic Code Block) và convert sang hexdecimal rồi gán cho session. 
 
 2. Cho file parameter và ta có thể đọc được các file trong hệ thống, tuy nhiên hàm này có đi qua 1 hàm fitler là `safe()`, ta có thể dùng `file` để đọc `/tmp/sess_[PHPSESSID]` và thấy được kết quả sau khi encrypt.
 
 3. Cho `auth_key parameter`, nếu cung cấp đúng `auth_key` thì cho phép thực thi code tuy nhiên bị giới hạn không quá 5 ký tự.
 
 ## Exploit
-Thuận toán encrypt ECB là 1 thuật toán mã hóa không an toàn, đặc biệt khi `block_siz`e quá nhỏ như 16 bytes. 
+Thuận toán ECB encryption là 1 thuật toán mã hóa không an toàn, đặc biệt khi `block_size` quá bé như 16 bytes. 
 
 Ta biết rằng thuật toán ECB chia plaintext ra thành các block 16 bytes và encrypt các block này độc lập với nhau. Nếu chưa đủ 16 bytes thì thuật toán sẽ tự thêm padding cho đủ 16 bytes. 
 
@@ -105,13 +105,15 @@ for i in range(15, -1, -1):
 
 **auth_key**: `AuthKey4N00b3r`
 
-**payload**: 
+Có được auth_key rồi, tìm flag thôi!!
+
 ```bash
 # List file tìm được file chứa flag
 curl 'http://localhost:2010/?command=ls%20/&auth_key=AuthKey4N00b3r'
 # nice_flag_for_new_kcsc_member.txt
-
-# Vì tham số command bị giới hạn kí tự, ta có thể dùng: "m4 /*" để đọc hết file
+```
+Thử `?file=nice_flag_for_new_kcsc_member.txt` nhưng không thể đọc được, có lẽ đã bị hàm safe() filter. Tuy nhiên ta vẫn có thể dùng m4(command tựa cat) cùng với wildcard(`*`) để đọc hết file ở root directory.
+```bash
 curl 'http://localhost:2010/?command=m4%20/*&auth_key=AuthKey4N00b3r'
 ```
 
