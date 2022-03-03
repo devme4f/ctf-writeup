@@ -107,7 +107,7 @@ else {
 }
 ?>
 ```
-Chú ý sau khi `base64_decode` nó có check lại liệu `null byte(\x00)` có ở trong chuỗi, có thì trả về `Hacker Detect`.
+Chú ý sau khi `base64_decode` nó có check lại liệu `null byte(\x00)` có ở trong chuỗi, có thì trả về `Hacker Detected`.
 
 `../classes/chain.php`: Ok dạng PHP unserialize POP Chains, phân tích dài dòng ở dưới
 
@@ -127,7 +127,7 @@ Tóm tắt  các `magic methods` trước khi review và generate `payload` nào
 
 Chain tất cả class lại với nhau(trừ class Url) và tạo ra payload nào. 
 
-*Lưu ý*: Dùng lại tất cả các class trên để viết `serialized object` nhưng còn nhớ `Hacker Detect` phía trên chứ, theo PHP thì để biểu thị 1 `property` là private thì khi serialize nó sẽ add thêm `\x00` phía trước tên của property đó nên mình cần sửa `private $source;` của class `Source` thành `public $source;`.
+*Lưu ý*: Dùng lại tất cả các class trên để viết `serialized object` nhưng còn nhớ `Hacker Detected` phía trên chứ, theo PHP thì để biểu thị 1 `property` là private thì khi serialize nó sẽ add thêm `\x00` phía trước tên của property đó nên mình cần sửa `private $source;` của class `Source` thành `public $source;`.
 ```php
 <?php
  
@@ -213,7 +213,7 @@ echo base64_encode($data) . "\n\n";
 #Tzo1OiJGdW5jMiI6MTp7czo1OiJwYXJhbSI7Tzo2OiJTb3VyY2UiOjE6e3M6Njoic291cmNlIjtPOjU6IkZ1bmMxIjoyOntzOjY6InBhcmFtMSI7Tzo0OiJGaWxlIjoxOntzOjQ6ImZpbGUiO3M6NTU6IlBocDovL2ZpbHRlci9jb252ZXJ0LmJhc2U2NC1lbmNvZGUvcmVzb3VyY2U9Li4vZmxhZy5waHAiO31zOjY6InBhcmFtMiI7czoxMDoiX190b1N0cmluZyI7fX19
 ```
 
-Đổi cookie variable `data` thành chuỗi base64 trên ta được:
+Đổi cookie `data` variable thành chuỗi base64 trên ta được:
 ![base64 flag](base64_flag.png)
 
 **flag**: `KCSC{fake_flag_for_testing}`
