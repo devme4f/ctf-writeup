@@ -81,7 +81,7 @@ def encrypt(text: str, key: int):
     
 def reverse(c, er):
     a = ord(c) - ord(er)
-    if a >= 20:
+    if a >= key:
         result = a - key + ord(er)
     else:
         result = a + 26 - key + ord(er)
