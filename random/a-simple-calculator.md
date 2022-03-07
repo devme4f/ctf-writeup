@@ -115,5 +115,7 @@ flag_enc = encrypt(flag_dec, key)
 print(flag_dec)
 print(flag_enc)
 ```
+**Hoặc**:
+![unknown](https://user-images.githubusercontent.com/71699412/157073116-d26b0f75-c3be-413f-96af-243932de5519.png)
 
 **flag**: `UMDCTF{w0w_brut3f0rc3ing_4ctu4lly_w0rks!}`
