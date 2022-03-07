@@ -21,9 +21,9 @@ def calc():
         val = f"{int(eval(request.json['f']))}"
 # .....
 ```
-File `secrets.py` có chứa `flag_enc` và `ws` được import vào `app.py`. `ws` có chứa các blacklist keyword đã được dấu khi trước khi public source-code. Server nhận f parameter đi qua hàm z, nếu trùng với blacklist thì sẽ trả về lỗi còn nếu không thì được đi vào `eval()`. 
+File `secrets.py` có chứa `flag_enc` và `ws` được import vào `app.py`. `ws` có chứa các blacklist keyword đã được dấu trước khi public source-code. Server nhận f parameter đi qua hàm z, nếu trùng với blacklist thì sẽ trả về lỗi còn nếu không thì được đi vào `eval()`. 
 
-Fuzz qua thì biết được hàm `ord()` và một số kí tự khác như `\` bị block nên không thể bypass hàm `z` hay đọc result dạng từng số ascii nên ta sẽ brute-foce `flag_enc` bằng cách cắt ra từng kí tự rồi so sánh từng cái thôi. 
+Fuzz qua thì biết được hàm `ord()` và một số kí tự khác như `\` bị block nên không thể bypass hàm `z` hay đọc result dạng từng số ascii nên ta sẽ brute-force `flag_enc` bằng cách cắt ra từng kí tự rồi so sánh từng cái thôi. 
 
 **Python scripts**: Brute-force encrypted flag
 ```python
