@@ -1,3 +1,7 @@
+# References
+**Sure**: https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/SQL%20Injection
+**Convenient**: https://portswigger.net/web-security/sql-injection/cheat-sheet
+
 # List table in current database(MySQL, PostgreSQL,...)
 ```
 SELECT .......... WHERE table_schema='local'-- -
