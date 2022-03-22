@@ -30,5 +30,5 @@ This is a much more robust way of validating the file type, but even this isn't 
 
 `1.jpg` là ảnh chèn metadata. Câu lệnh trên chèn code `PHP` vào metadata của `1.jpg` và khi ảnh này được upload và được đọc như file php(file extension/inclusion) thì đoạn code PHP trên sẽ được thực thi. Phần START và END để phân biệt output của câu lệnh với đống byte 'rác'.
 
-![magic](magic.png)
+<img width="742" alt="magic" src="https://user-images.githubusercontent.com/71699412/159521080-cc912ccb-7799-42de-beb9-0e847dac170c.png">
 
