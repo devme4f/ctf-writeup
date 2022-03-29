@@ -1,3 +1,5 @@
+**References**: https://portswigger.net/web-security/xxe
+
 # XXE attacks via file upload (.svg)
 ```svg
 <?xml version="1.0" standalone="yes"?>
