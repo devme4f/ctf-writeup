@@ -1,5 +1,7 @@
 # nahamcon CTF - Hacker TS
 
+Blind XSS make cross-site request forgery to localhost trộm sensitive information(flag)
+
 ## Description
 We all love our hacker t-shirts. Make your own custom ones.
 
