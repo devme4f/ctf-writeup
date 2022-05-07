@@ -1,5 +1,7 @@
 # nahamcom CTF - Two For One
 
+Blind XSS make cross-site request forgery đánh cắp 2FA QR code sau đó reset password chiếm tài khoản admin
+
 ## Description
 Need to keep things secure? Try out our safe, the most secure in the world!
 
