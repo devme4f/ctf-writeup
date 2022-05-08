@@ -1,13 +1,6 @@
 # nahamcon CTF - Deafcon
 
-## Write up 1
-App have genarate letter pdf function that vulnerable to SSTI on email field. After quick fuzzing i detect that email must have '@' and app filter (, ) and space char
-Then i use UTF8 encoding to bypass (, ) and {IFS} to bypass space in command.
-test%40{{config.__class__.__init__.__globals__.os.popen%EF%BC%88'cat${IFS}flag.txt'%EF%BC%89.read%EF%BC%88%EF%BC%89}}
-
-https://github.com/longtranf/ctf-writeups/tree/main/Nahamcon2022/DeafCon
-
-## Write up 2
+## Write up 
 Name: sam
 
 Email: "{{request.application['__globals__'].__builtins__.__import__﹙'os'﹚.popen﹙'cat flag.txt'﹚.read﹙﹚}}"@m.edu
@@ -21,13 +14,13 @@ The email syntax checker allows certain characters ONLY if the portion to the le
 ## Note nhẹ
 
 ### Quick Review
-1. App cho 2 phần user input là name và email, sau khi submit website trả về trang pdf chứa name và email vừa cung cấp.
-2. Test param name thì bị filter chỉ whitelist regex /a-zA-Z0-9/
+1. App cho 2 phần user input là `name` và `email`, sau khi submit website trả về trang pdf chứa name và email vừa cung cấp.
+2. Test param name thì bị filter chỉ white list regex `/a-zA-Z0-9/`
 3. Param email có email parser ở backed, ví dụ như `a<img src="//a.com">@gmail.com` sẽ không đúng format và trả về lỗi không tuân thủ `RFC5322`. Ngoài ra nó filter ngoặc tròn '(' và ')'
 
 ### Exploit
-1. Để bypass email parser: `"a<we're good>"@a.com`, phần username được bọc bằng dấu ngoặc kép
-2. Thử tiếp: `"a{{7*'7'}}"@a.com` được `7777777` tức dính lỗi SSTI
+1. Để bypass email parser: `"a<we're good>"@a.com`, (phần username được bọc bằng dấu ngoặc kép bypass parser)
+2. Thử tiếp: `"a{{7*'7'}}"@a.com` được `7777777` tức dính lỗi *SSTI*
 3. Ta dùng unicode bypass filter '(' và ')' được payload sau:
 
 ```
