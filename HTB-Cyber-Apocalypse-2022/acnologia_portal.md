@@ -204,6 +204,8 @@ report = s.post(url+'/api/firmware/report', json={'module_id': '1', 'issue': pay
 print(report.text)
 ```
 
-Attemp upload `__init__.py` để RCE luôn nhưng bất thành: https://ajinabraham.com/blog/exploiting-insecure-file-extraction-in-python-for-code-execution
+Chui đến: `http://ip:port/static/css/main.css` ta được flag
 
 **flag**: `HTB{des3r1aliz3_4ll_th3_th1ngs}`
+
+Attemp upload `__init__.py` để RCE luôn nhưng bất thành: https://ajinabraham.com/blog/exploiting-insecure-file-extraction-in-python-for-code-execution
