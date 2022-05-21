@@ -110,7 +110,9 @@ Từ đó, ta có thể truy cập đến `/static/css/main.css`(endpoint đư�
 ## Exploit 
 
 **Step 1**: Đầu tiên ta tạo 1 file symlink có tên là `payload` trỏ đến `../../../../flag.txt`
-
+```bash
+ln -s payload ../../../../flag.txt
+```
 **Step 2**: file `createTar.py`: tạo 1 file tar và add file symlink và đổi tên thành `../../app/application/static/css/main.css`
 ```python
 import tarfile
