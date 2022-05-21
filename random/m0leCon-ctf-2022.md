@@ -32,8 +32,6 @@ Module `os` của python có object `environ` chứa tất cả các biến môi
 
 Đặt email là: `{{joiner.init.globals.os.environ}}@a.b`, login vào profile ta được flag
 
-Vào đến tab tài khoản chỗ email ta được các env variables cũng flag
-
 ..........
 
 **FLAG**: `ptm{d1d_u_f1nd_th3_r1ckr0ll?}`
