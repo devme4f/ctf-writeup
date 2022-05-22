@@ -18,7 +18,7 @@
     
 [Genesis Wallet](https://github.com/devme4f/ctf-writeup/tree/main/HTB-Cyber-Apocalypse-2022#genesis-wallet)
     
-[Spiky Tamagotchy](https://github.com/devme4f/ctf-writeup/blob/main/HTB-Cyber-Apocalypse-2022#spiky-tamagotchy)
+[Spiky Tamagotchy](https://github.com/devme4f/ctf-writeup/tree/main/HTB-Cyber-Apocalypse-2022#spiky-tamagotchy)
 
 ## Kryptos Support
 
