@@ -206,6 +206,8 @@ print(report.text)
 
 Chui đến: `http://ip:port/static/css/main.css` ta được flag
 
+![Acnologia_Portal_flag](https://user-images.githubusercontent.com/71699412/169696076-bffde5d0-7827-4a17-9633-61ccf0c1752e.jpg)
+
 **flag**: `HTB{des3r1aliz3_4ll_th3_th1ngs}`
 
 Attemp upload `__init__.py` để RCE luôn nhưng bất thành: https://ajinabraham.com/blog/exploiting-insecure-file-extraction-in-python-for-code-execution
