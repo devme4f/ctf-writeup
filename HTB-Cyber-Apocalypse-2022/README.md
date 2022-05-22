@@ -4,14 +4,23 @@
 
 cop lại full url
 
-[Kryptos Support](#kryptos-support)
-[Blinkerfluids](#blinkerfluids)
-[Admidst Us](#admidst-us)
-[Mutation Lab](#mutation-lab)
-[Intergalactic Post](intergalactic-post)
-[Red Island](#red-island)
-[title](http://~)
 [Acnologia Portal](https://github.com/devme4f/ctf-writeup/blob/main/HTB-Cyber-Apocalypse-2022/acnologia_portal.md)
+    
+[Kryptos Support](https://github.com/devme4f/ctf-writeup/tree/main/HTB-Cyber-Apocalypse-2022#kryptos-support)
+    
+[Blinkerfluids](https://github.com/devme4f/ctf-writeup/tree/main/HTB-Cyber-Apocalypse-2022#blinkerfluids)
+    
+[Admidst Us](https://github.com/devme4f/ctf-writeup/tree/main/HTB-Cyber-Apocalypse-2022#admidst-us)
+    
+[Mutation Lab](https://github.com/devme4f/ctf-writeup/tree/main/HTB-Cyber-Apocalypse-2022#mutation-lab)
+    
+[Intergalactic Post](https://github.com/devme4f/ctf-writeup/tree/main/HTB-Cyber-Apocalypse-2022#intergalactic-post)
+    
+[Red Island](https://github.com/devme4f/ctf-writeup/tree/main/HTB-Cyber-Apocalypse-2022#red-island)
+    
+[Genesis Wallet](https://github.com/devme4f/ctf-writeup/tree/main/HTB-Cyber-Apocalypse-2022#genesis-wallet)
+    
+[Spiky Tamagotchy](https://github.com/devme4f/ctf-writeup/blob/main/HTB-Cyber-Apocalypse-2022#spiky-tamagotchy)
 
 ## Kryptos Support
 
