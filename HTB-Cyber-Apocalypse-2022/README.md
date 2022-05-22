@@ -2,8 +2,6 @@
 
 **Mục lục**:
 
-cop lại full url
-
 [Acnologia Portal](https://github.com/devme4f/ctf-writeup/blob/main/HTB-Cyber-Apocalypse-2022/acnologia_portal.md)
     
 [Kryptos Support](https://github.com/devme4f/ctf-writeup/tree/main/HTB-Cyber-Apocalypse-2022#kryptos-support)
