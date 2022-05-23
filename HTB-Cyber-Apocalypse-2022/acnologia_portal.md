@@ -103,7 +103,7 @@ def extract_firmware(file):
 4. File name không hề được validate và dính lỗi path traversal.
 
 
-**Ý tưởng**: Bởi vì chỉ admin mới có thể upload file, ta XSS tạo code javascript có chức năng tự request đến endpoint và upload 1 file tar, cái mà sẽ được tự động extract. File tar chứa file 1 symlink với tên path traversal `../../app/application/static/css/main.css` trỏ đến `../../../../flag.txt`. 
+**Ý tưởng**: Bởi vì chỉ admin mới có thể upload file, ta CSRF tạo code javascript có chức năng tự request đến endpoint và upload 1 file tar, cái mà sẽ được tự động extract. File tar chứa file 1 symlink với tên path traversal `../../app/application/static/css/main.css` trỏ đến `../../../../flag.txt`. 
 
 Từ đó, ta có thể truy cập đến `/static/css/main.css`(endpoint được public nay là 1 symlink) để đọc flag.
 
