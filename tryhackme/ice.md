@@ -104,10 +104,7 @@ dark-pc$  WORKGROUP  (null)
 
 Command allows us to watch the remote user's desktop in real time: `screenshare`
 
-!!
-picture here
-!!
-
+![Screenshot (872)](https://user-images.githubusercontent.com/71699412/170050314-ec969ff9-05da-428a-81dc-935af5645821.png)
 
 Mimikatz allows us to create what's called a `golden ticket`, allowing us to authenticate anywhere with ease. What command allows us to do this?
 
