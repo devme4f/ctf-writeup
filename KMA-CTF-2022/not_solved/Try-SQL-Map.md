@@ -42,5 +42,5 @@ Same with column and flag using column_name from information_schema.tables --> s
 
 **Góc than thở**:
 ```
-Check kĩ liệu payload có lỗi, hàm nào thực sự bị block(simplify it
+Trước khi kết luật điều gì, check kĩ liệu payload có lỗi, hàm nào thực sự bị block. Mỗi chall lỗi nó dump khác nhau, tiêu chỉnh từ từ, đừng ngu.
 ```
