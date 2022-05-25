@@ -376,3 +376,11 @@ print(r.text)
 ## Genesis Wallet's Revenge
 
 ## CheckpointBots
+log4j với 1 chút bypass
+
+Dùng package `log4j`:
+
+![ef9284ce1c077cc045f5021071ea107f](https://user-images.githubusercontent.com/71699412/170280577-173b6cf9-a209-4caf-9231-96c0ee716463.png)
+               
+                    
+**write up**: https://blog.csdn.net/qq_53263789/article/details/124892879
