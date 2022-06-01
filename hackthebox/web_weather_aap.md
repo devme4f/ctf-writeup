@@ -159,7 +159,7 @@ Host debug tại local, khi build payload lưu ý:
 
 1. Request đầu cần host lẫn port để thành 1 valid request.
 2. Với request thứ 2, payload SQLi cần urlencode nên không thể thiếu `Content-Type`, POST method nên cần `Content-Length`.
-3. Kết thúc main request cần end gói request này bằn `\r\n\rn` và đệm tiếp 1 request cuối để valid.
+3. Kết thúc main request cần end gói request này bằn `\r\n\rn` và đệm tiếp 1 request cuối để valid bởi ở sau nó còn nối thêm đống param và api-key ta cần escape.
 4. Vì SQLite không có `ON DUPLICATE KEY UPDATE <key>=<value>;` nên ta dùng `ON CONFLIC(<key>) DO UPDATE SET <key>=<value>;`.
 
 **Duplicate SQLite**: https://stackoverflow.com/questions/2717590/sqlite-insert-on-duplicate-key-update-upsert
