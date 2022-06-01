@@ -60,7 +60,7 @@ Content-Type: application/x-www-form-urlencoded
 
 email=devme1@abc.com', 'a') ON DUPLICATE KEY UPDATE send_date=DATE('2023-11-22')-- -
 ```
-Ta SQLi ở insert, nếu email trùng thì duplicate update send_date cho quá hạn là được!!
+Ta SQLi ở insert, nếu email trùng thì duplicate update `send_date` cho quá hạn là được!!. À mà quên, ta leak được column vs table_name nhưng không đọc được value trong đó nên ta không đoán được type của send_date là gì. Học làm pentest mà còn hỏi, phải test chứ gì, `int` không được nghĩ đến hàm `date()` để parse date.
 
 `response`:
 ```
