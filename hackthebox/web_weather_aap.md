@@ -107,7 +107,7 @@ module.exports = {
 
 Endpoint `/register` dính SQLi nhưng endpoint này chỉ có thể truy cập từ `locahost`, phần `http.get` có khả năng dính `HTTP Request Splitting`. Hướng khai thác khá rõ ràng, `SSRF` đến endpoint `/register` thực hiện SQLi cướp tài khoản admin rồi login để lấy flag
 
-Nghiên cứu: Nodejs version `8.x` and `6.x` có khả năng dính lỗi `HTTP Request Splitting`. Thư viện `http` của nodejs cũng có khả năng chống SSRF nếu url có chứa các protocol characters và nó sẽ escape bằng cách `percent-escaped`. Tuy nhiên:
+**Nghiên cứu**: Nodejs version `8.x` and `6.x` có khả năng dính lỗi `HTTP Request Splitting`. Thư viện `http` của nodejs cũng có khả năng chống SSRF nếu url có chứa các protocol characters và nó sẽ escape bằng cách `percent-escaped`. Tuy nhiên:
 
 Although users of the http module will typically specify the request path as a string, Node.js must ultimately output the request as raw bytes(phải output ra raw byte tức phải convert). JavaScript has unicode strings, so converting them into bytes means selecting and applying an appropriate unicode encoding. For requests that do not include a body, Node.js defaults to using "latin1"(mặc định convert sang latin1), a single-byte encoding that cannot represent high-numbered unicode characters such as the 🐶 emoji. Such characters are instead truncated to just their lowest byte of their internal JavaScript representation
 
@@ -125,11 +125,11 @@ But when the resulting string is encoded as latin1 to write it out to the wire, 
 ```
 Thus, by including carefully-selected unicode characters in the request path, an attacker could trick Node.js into writing HTTP protocol control characters out to the wire. The behaviour has been fixed in the recent Node.js 10 release.
 
-Bug report: https://hackerone.com/reports/409943
+**Bug report**: https://hackerone.com/reports/409943
 
-Explaination: https://www.rfk.id.au/blog/entry/security-bugs-ssrf-via-request-splitting/
+**Explaination**: https://www.rfk.id.au/blog/entry/security-bugs-ssrf-via-request-splitting/
 
-Build python script đấm nó thôi;
+Build python script đấm nó thôi:
 ```python
 import requests
 import urllib.parse
@@ -162,7 +162,7 @@ Host debug tại local, khi build payload lưu ý:
 3. Kết thúc main request cần end gói request này bằn `\r\n\rn` và đệm tiếp 1 request cuối để valid.
 4. Vì SQLite không có `ON DUPLICATE KEY UPDATE <key>=<value>;` nên ta dùng `ON CONFLIC(<key>) DO UPDATE SET <key>=<value>;`.
 
-Duplicate SQLite: https://stackoverflow.com/questions/2717590/sqlite-insert-on-duplicate-key-update-upsert
+**Duplicate SQLite**: https://stackoverflow.com/questions/2717590/sqlite-insert-on-duplicate-key-update-upsert
 
 `encoded payload`:
 ```
