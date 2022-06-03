@@ -300,7 +300,7 @@ Vì có lẽ intent của bài là RCE nên không có chuyện đọc được 
 3. `python3 /tmp/shell.py` --> SHELL
 4. Chạy `/readflag` thì ta lấy được flag, có lẽ lúc send output bằng curl dù đã base64 encode mà vẫn không đọc được hết output nên không tìm thấy
 	
-**flag**: `d_h4nd5_t0_th3_r3disland!}`
+**flag**: `HTB{r3d_h4nd5_t0_th3_r3disland!}`
 
 ## Genesis Wallet
 **Write up**: https://h1pmnh.github.io/post/ctf-htb-cyber-apolcalypse-web-genesis-wallet/
