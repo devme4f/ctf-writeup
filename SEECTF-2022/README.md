@@ -5,7 +5,7 @@ Write up nhằm ép mình hiểu bản vấn đề và giải thích + repoduce 
 
 # Mục Lục
 
-Sourceless Guessy Web (Baby Flag):
+Sourceless Guessy Web (Baby Flag): [sourceless-guessy-web-baby-flag](#sourceless-guessy-web-baby-flag)
 
 Sourceless Guessy Web (RCE Flag):
 
@@ -31,7 +31,7 @@ Web3 - Bonjour:
 
 Misc - Angry Zeyu2001: 
 
-Misc- "as" "df":
+Misc - "as" "df":
 
 # WEB
 
