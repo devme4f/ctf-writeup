@@ -468,12 +468,21 @@ Base64 decode là được flag thôi.
 
 ## Bonjour
 
-Cho ip và port để `nc` đến.
+Cho ip và port để `nc` đến, nó cho các chức năng sau
 
 1. Tạo account
 2. Tạo contract
 3. Get flag
 4. Show source code
+
+**Solution**:
+
+1. Tạo account được mã `deployer account` và `token`
+2. Gửi khoảng `0.22` ETH đến mã account để được kính hoạt, ở đây nó hướng dẫn đàng hoàng: https://github.com/Social-Engineering-Experts/ETH-Guide
+3. Sau khi đã nhận được ETH, tài khoản được kính hoạt, ta tạo contract bằng cách nộp `token` cho nó, nó trả về `contract address`
+4. Get flag thì phải solved đã
+5. Đọc source code(ở dưới), ta cần gọi hàm set biến `_hello` là được
+6. Get flag
 
 ```python
 from web3 import Web3, HTTPProvider
@@ -521,11 +530,13 @@ tx_receipt = w3.eth.wait_for_transaction_receipt(tx_hash)
 print(contract.functions.isSolved().call())
 ```
 **Tham khảo**:
+
 https://web3py.readthedocs.io/en/stable/contracts.html#invoke-ambiguous-contract-functions-example
 
 https://ctftime.org/writeup/25917
 
 **flag**: `SEE{W3lc0mE_t0_SEETF_a71cda2f322e7834169418a9d1a036a0}`
+
 # MISCELLANEOUS
 
 ## Angry Zeyu2001
