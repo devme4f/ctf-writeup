@@ -5,33 +5,37 @@ Write up nhằm ép mình hiểu bản vấn đề và giải thích + repoduce 
 
 # Mục Lục
 
-Sourceless Guessy Web (Baby Flag): [sourceless-guessy-web-baby-flag](#sourceless-guessy-web-baby-flag)
+[Sourceless Guessy Web (Baby Flag)](#sourceless-guessy-web-baby-flag)
 
-Sourceless Guessy Web (RCE Flag):
+[Sourceless Guessy Web (RCE Flag)](#sourceless-guessy-web-rce-flag)
 
-Super Secure Requests Forwarder:
+[Super Secure Requests Forwarder](#super-secure-requests-forwarder)
 
-Flag Portal (Flag 1):
+[Flag Portal (Flag 1)](#flag-portal-flag-1)
 
-Flag 2:
+[Flag Portal (Flag 2)](#flag-portal-flag-2)
 
-Username Generator:
+[Flag 1](#flag-1)
 
-The Pigeon Files:
+[Flag 2](#flag-2)
 
-Star Cereal Episode 3: The Revenge of the Breakfast:
+[Username Generator](#username-generator)
 
-Log4Security:
+[The Pigeon Files](#the-pigeon-files)
 
-Charlotte's Web:
+[Star Cereal Episode 3: The Revenge of the Breakfast](#star-cereal-episode-3-the-revenge-of-the-breakfast)
 
-XSPwn:
+[Log4Security](#log4security)
 
-Web3 - Bonjour: 
+[Charlotte's Web](#charlottes-web)
 
-Misc - Angry Zeyu2001: 
+[XSPwn](#xspwn)
 
-Misc - "as" "df":
+[Web3 - Bonjour](#bonjour)
+
+[Misc - Angry Zeyu2001](#angry-zeyu2001)
+
+[Misc - "as" "df"](#as-df)
 
 # WEB
 
