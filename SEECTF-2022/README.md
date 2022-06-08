@@ -5,6 +5,33 @@ Write up nhằm ép mình hiểu bản vấn đề và giải thích + repoduce 
 
 # Mục Lục
 
+Sourceless Guessy Web (Baby Flag):
+
+Sourceless Guessy Web (RCE Flag):
+
+Super Secure Requests Forwarder:
+
+Flag Portal (Flag 1):
+
+Flag 2:
+
+Username Generator:
+
+The Pigeon Files:
+
+Star Cereal Episode 3: The Revenge of the Breakfast:
+
+Log4Security:
+
+Charlotte's Web:
+
+XSPwn:
+
+Web3 - Bonjour: 
+
+Misc - Angry Zeyu2001: 
+
+Misc- "as" "df":
 
 # WEB
 
