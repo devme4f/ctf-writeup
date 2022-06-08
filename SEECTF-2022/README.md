@@ -416,7 +416,7 @@ Phân tích sâu hơn, ở đây nếu `usernameLength` khác `null` tức là �
 
 ![Screenshot (907)](https://user-images.githubusercontent.com/71699412/172574375-f5eb67cf-0612-404d-bd8e-289fc4922501.png)
 
-Vậy nếu ta mở được 1 tab mới bằng `window.open()` với tên ta tab ta có thể kiểm soát, đây chính là xss inject point.
+Vậy nếu ta mở được 1 tab mới bằng `window.open()` với tên tab ta có thể kiểm soát, đây chính xác là xss injection point.
 
 **Syntax**: `window.open(URL, name, specs, replace)`
 
@@ -438,7 +438,9 @@ def index():
 
 if __name__ == '__main__':
 	app.run(host="0.0.0.0", port=8989, debug=True)
-```**Lưu ý thêm**: 
+```
+
+**Lưu ý thêm**: 
 
 1. Dùng tag `</script>` bị dính lỗi end of string nên dùng `<img>` là đủ.
 2. Tên hostname phải là `app`
