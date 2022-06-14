@@ -59,17 +59,17 @@ http://sourcelessguessyweb.chall.seetf.sg:1337/?page=../../../etc/passwd
 
 **found**: https://ctftime.org/writeup/30236
 
-Với chall này `register_argc_argv` được bật `On` ở `php.ini`(mặc định ở PHP mấy bản cũ 5.2.17< sẽ bật On, còn mấy bản mới hơn thường Off) và `peclcmd.php` cũng nằm trong `/usr/local/lib/php/`(Ta có thể test bằng cách include `peclcmd.php`).
+Với chall này `register_argc_argv` được bật `On` ở `php.ini`(mặc định ở Docker sẽ là On) và `peclcmd.php` nằm trong `/usr/local/lib/php/`(Ta có thể test bằng cách include `peclcmd.php`).
 
 Phân tích lỗi sâu hơn: https://chowdera.com/2022/01/202201071654034352.html
 
 **Tóm tắt**: 
 
-1. Khi `register_argc_argv` được bật thì script được chạy từ CLI sẽ access đến được các biến này(các biến này thuộc global variable($\_SERVER)), tức `php test.php $argc[2]`, từ url, các biến được phân cách bằng `+` thay vì `&`.
+1. Khi `register_argc_argv` được bật thì script được chạy từ CLI sẽ access đến được các biến này(các biến này thuộc global variable(`$_SERVER`)), tức `php test.php $argc[2]`, từ url, các biến được phân cách bằng `+` thay vì `&`.
 
-2. `pear` là 1 kho thư viện mở rộng cho php, với `peclcmd.php` ta có thể dùng script này để tải các thư viện, extension mới cho php. 
+2. `pear` là 1 kho thư viện mở rộng cho php, với `peclcmd.php` ta có thể dùng script này để tạo 1file config cho php bằng cách dùng command `config-create`. 
 
-=> Lợi dụng LFI ta có thể include `peclcmd.php` + với `register_argc_argv: On` ta có thể điều kiển các biến như là thực thi `peclcmd.php` ở CLI.
+=> Lợi dụng LFI ta có thể include `peclcmd.php` + với `register_argc_argv: On` ta có thể điều kiển các biến như là thực thi `peclcmd.php` ở CLI và tạo 1 PHP webshell.
 
 **EXPLOIT**:
 
