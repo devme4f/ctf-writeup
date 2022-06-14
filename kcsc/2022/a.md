@@ -45,8 +45,11 @@ router.get('/notes/search', (req, res) => {
 
 // .............
 ```
+![Screenshot (914)](https://user-images.githubusercontent.com/71699412/173526274-b65310f8-f85c-4396-b937-d5f2c6396c84.png)
 
-Nếu tìm thấy note status code sẽ là `200` trong khi nếu không thì `404`. Ok đây là 1 bài XSLeak, ta có thể dùng script để load thử route `/notes/search` tìm kiếm note, nếu đúng thì onload được, 404 sẽ là error: https://xsleaks.dev/docs/attacks/error-events/
+![Screenshot (913)](https://user-images.githubusercontent.com/71699412/173526283-936a39b7-0a1f-456e-af73-0626c318449e.png)
+
+Nếu tìm thấy note status code sẽ là `200` trong khi nếu không thì `404`. Ok đây là 1 bài XSLeak(error-based cross-site leaks), ta có thể dùng script để load thử route `/notes/search` tìm kiếm note, nếu đúng thì onload được, 404 sẽ là error: https://xsleaks.dev/docs/attacks/error-events/
 
 `index.html`:
 ```html
