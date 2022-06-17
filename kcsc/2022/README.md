@@ -1,6 +1,6 @@
 ## Leak me if you can
 
-Bài whitebox: Challenge là 1 trang có chức năng tạo note, đọc note và tìm kiếm note. Có 2 loại note là `is_admin` `1` hoặc `0`, flag nằm ở note `is_admin`.
+Bài whitebox: Challenge là 1 trang có chức năng tạo note, đọc note và tìm kiếm note. Có 2 loại note là `is_admin` `1` hoặc `0`, flag nằm ở note `is_admin=1`.
 Ngoài ra có chức năng report báo cáo 1 url cho admin và 1 con bot sẽ tự động đến xem.
 
 ```js
