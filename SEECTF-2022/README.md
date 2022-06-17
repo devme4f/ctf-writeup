@@ -567,6 +567,103 @@ Base64 decode là được flag thôi.
 
 ## The Pigeon Files
 
+**CHƯA HOÀN THÀNH**
+
+Mình muốn nhắc lại về sự kiên trì, mầu chốt không phải là bài CTF mình chưa gặp lần nào nên chưa giải được mà là chưa theo tới bến mà bỏ cuộc giữa chừng. Mình luôn muốn nhắc đi nhắc lại đừng 2 từ nỗ lực thôi đó.
+
+Như bài XSLeak này mình không biết Leak bằng `history.length` kiểu gì rồi đòi thôi, chính sự kiên trì khiến mình đi tìm hiều `history.length` là gì - hoạt động như nào, tìm payload với iframe.
+
+1. Viết note sau nó được lưu ở `localStorage` sau đó trả về token, có cái này mới tìm được note đã lưu.
+2. Để tìm kiếm, cần note + token
+```js
+const search = (request) => {
+    const uuid = window.localStorage.getItem("uuid");
+    const note = window.localStorage.getItem("note");
+
+    if (!uuid || !note) {
+        Swal.fire(
+            'Not found',
+            'You need to submit a note first.',
+            'error'
+        )
+        return null;
+    }
+    
+    if (note.startsWith(request.search)) {
+        request.result = note;
+    }
+    else {
+        request.result = null;
+    }
+    
+    if (request.token === uuid) {
+        request.accessGranted = true;
+    }
+
+    return request;
+};
+
+// Search for notes
+if (location.search) {
+
+    // MooTools awesome query string parsing
+    request = String.parseQueryString(location.search.slice(1));
+    request = search(request);
+
+    if (request) {
+        if (!request.accessGranted) {
+            output.textContent = "Access denied.";
+        }
+        else if (!request.result) {
+            output.textContent = "Note not found.";
+        }
+        else {
+            output.textContent = request.result;
+            setTimeout(() => {window.location.search = ""}, 5000);
+        }
+    }
+}
+````
+3. Nếu tìm thấy note thì trả về, sau 5s thì chuyển hướng, không thì chẳng có gì.
+
+Comment trong CTF thường là hint, xem thêm về `MooTools`: `index.html`
+
+```html
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/mootools/1.6.0/mootools-core.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/mootools-more/1.6.0/
+```
+
+Search: `mootools 1.6.0 vulnerabilities` --> prototype pollution --> Poc: https://github.com/BlackFan/client-side-prototype-pollution/blob/master/pp/mootools-more.md
+
+`Mootools 1.6.0` dính prototype pollution ở đây:
+```js
+String.parseQueryString(input);
+```
+
+Để tìm được note mà không cần token, ta chỉ cần pollution cho `request.accessGranted = true`.
+
+```
+http://pigeon.chall.seetf.sg:1337/?search=&constructor[prototype][accessGranted]=true&uuid=1
+```
+
+Bây giờ ta có thể đọc note mà không cần `token`, flag thì tất nhiên nằm ở admin, site không dính XSS nhưng như đã nói ở trước, nếu tìm thấy note thì sau 5s nó sẽ chuyển hướng => `XSLeak` brute-force flag.
+
+
+Tấn công `XSLeak` bằng cách dùng `history.length`: https://xsleaks.dev/docs/attacks/navigations/
+
+```html
+<script>
+	
+</script>
+```
+
+`history.length`: Trả về số urls trong lịch sử mà cửa sổ hiện tại đã request đến.
+
+Nạp payload vào iframe. Nếu tìm đúng note nó sẽ redirect sau 5s từ đó ta dựa vào số urls của cửa sổ hiện tại chứa iframe để brute-force ra note của admin.
+
+Nếu không đúng note, sẽ thì `history.length = 2` bởi chính url của page và url của iframe, nếu có redirect thì `history.length = 3`.
+
+
 ## Star Cereal Episode 3: The Revenge of the Breakfast
 
 ## Log4Security
