@@ -2,6 +2,15 @@
 
 Thật dễ hiểu khi đọc write up với các step tưởng như logic dễ dàng suy luận ra trong khi thực tế đó còn là nỗi sợ đi sai hướng hay bị đánh lừa đối với người thiếu kinh nghiệm như mình. Nhưng dù sao mỗi thất bại là 1 bài học.
 
+## Mục lục
+[Find me](#find-me)
+
+[Inject me](#inject-me)
+
+[Pwn me](#pwn-me)
+
+[MineMe](#mineme)
+
 ## Find me
 
 ![Screenshot (924)](https://user-images.githubusercontent.com/71699412/174470532-485f08d4-d8ef-4873-b924-df79b0887f1b.png)
