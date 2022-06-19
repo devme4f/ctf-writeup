@@ -53,7 +53,7 @@ SQLi sau FROM statement.
 
 ![Screenshot (919)](https://user-images.githubusercontent.com/71699412/174470125-c56d26f1-adbd-4513-b025-dc0d7012adf1.png)
 
-Ở đây ta chưa biết table name lẫn column name. Ta có thể dùng kĩ thuật `nested query` để lấy `tbl_name` từ `sqlite_master`. Tuy nhiên, column trả về ở đây buộc phải là `msg` do đó ta alias `tbl_name` thành `msg`.
+Ở đây ta chưa biết table name lẫn column name. Ta có thể dùng kĩ thuật `nested query` để lấy `sql` từ `sqlite_master`. Tuy nhiên, column trả về ở đây buộc phải là `msg` do đó ta alias `sql` thành `msg`.
 
 ```
 (select sql as msg from sqlite_master)
@@ -61,7 +61,7 @@ SQLi sau FROM statement.
 
 ![Screenshot (923)](https://user-images.githubusercontent.com/71699412/174470195-49853851-f522-496c-9671-33dae1752c55.png)
 
-Tuy nhiên trả về `No result` là bởi sau `where` `msg` phải bắt đầu với `MSG-` do đó ta cần thêm prefix là `MSG-`. Ngoài ra, các kí tự như `'` hay `"` bị block nên ta dùng function `char()` để bypass.
+Tuy nhiên trả về `No result` là bởi sau `where`, `msg` phải bắt đầu với `MSG-` do đó ta cần thêm prefix là `MSG-`. Ngoài ra, các kí tự như `'` hay `"` bị block nên ta dùng function `char()` để bypass.
 ```
 (select (char(77, 83, 71, 45) || sql) as msg from sqlite_master)
 ```
