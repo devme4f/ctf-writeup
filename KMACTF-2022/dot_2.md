@@ -1,5 +1,7 @@
 # KMACTF 2022 dot 2
 
+Thật dễ hiểu khi đọc write up với các step tưởng như logic dễ dàng suy luận ra trong khi thực tế đó còn là nỗi sợ đi sai hướng hay bị đánh lừa đối với người thiếu kinh nghiệm như mình. Nhưng dù sao mỗi thất bại là 1 bài học.
+
 ## Find me
 
 ![Screenshot (924)](https://user-images.githubusercontent.com/71699412/174470532-485f08d4-d8ef-4873-b924-df79b0887f1b.png)
@@ -159,8 +161,6 @@ system("echo pwnme!!");
 <!-- ?source=1 -->
 ```
 
-Thật dễ hiểu khi đọc write up với các step tưởng như logic dễ dàng suy luận ra trong khi thực tế đó còn là nỗi sợ đi sai hướng hay bị đánh lừa đối với người thiếu kinh nghiệm như mình. Nhưng dù sao mỗi thất bại là 1 bài học.
-
 Sau khi review source code, mình come up với keyword để google: `php file upload rce enviroment variable`
 
 Ở đây mình có tìm được 1 bài RCE với env và file upload nhưng cần hàm `mail()` được gọi. Mình cũng biết cần set biến `LD_PRELOAD`
@@ -171,13 +171,13 @@ https://www.anquanke.com/post/id/175403
 
 **Chú thích**:
 
-`LD_PRELOAD`: is an optional environmental variable containing one or more paths to shared libraries, or shared objects, that the loader will load before any other shared library including the C runtime library (libc.so). This is called preloading a library.
+1. `LD_PRELOAD`: is an optional environmental variable containing one or more paths to shared libraries, or shared objects, that the loader will load before any other shared library including the C runtime library (libc.so). This is called preloading a library.
 
-`putenv ( string $setting ) : bool`
+2. `putenv ( string $setting ) : bool`
 
-Khi 1 file thực thi thực hiện 1 thao tác/hàm nào đó nó sẽ reference đến thư viện cần được sử dụng, ở đây optional env `LD_PRELOAD` chứa path đến thư viện cần reference sẽ được lựa chọn khi được set.
+**Giải thích**:
 
-Với việc kiểm soát được hàm set biến môi trường `putenv()` ta có thể set biến này.
+Khi 1 file thực thi thực hiện 1 thao tác/hàm nào đó nó sẽ reference đến thư viện cần được sử dụng, ở đây optional env `LD_PRELOAD` chứa path đến thư viện cần reference sẽ được lựa chọn khi được set. Với việc kiểm soát được hàm set biến môi trường `putenv()` ta có thể set biến này.
 
 Để tấn công, có 2 cách:
 
@@ -190,7 +190,7 @@ int geteuid()
     system("ls");
 }
 ```
-Ta có thể upload 1 file thực thi(C) chứa chứa hàm bị hijack mà sẽ được gọi khi 1 hàm nào đó như `mail()` sẽ gọi đến `geteuid()`. Và vì thế, chỉ có thể exploit khi mà `mail()` được gọi.
+Ta có thể upload 1 file thực thi(C) đóng vai trò là 1 shared library chứa chứa hàm bị hijack mà sẽ được gọi. Ví dụ khi 1 hàm nào đó như `mail()` sẽ gọi đến `geteuid()`. Và vì thế, chỉ có thể exploit khi mà `mail()` được gọi.
 
 2. Cách hai `hijack shared library`:
 ```c
@@ -199,7 +199,7 @@ __attribute__ ((__constructor__)) void angel (void){
     system("ls");
 }
 ```
-Tương tự như trên, nhưng ở đây với `__attribute__ ((__constructor__))` bất cứ hàm nào load library thì hàm trên sẽ được tự động gọi.
+Tương tự như trên, nhưng ở đây với `__attribute__ ((__constructor__))` bất cứ hàm nào load shared library này thì hàm này đều được tự động gọi.
 
 **Exploit**:
 
