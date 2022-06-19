@@ -1,5 +1,25 @@
 # KMACTF 2022 dot 2
 
+## Find me
+
+![Screenshot (924)](https://user-images.githubusercontent.com/71699412/174470532-485f08d4-d8ef-4873-b924-df79b0887f1b.png)
+
+Dựa vào tên challenge, thử download hết website và grep nằm tìm flag:
+```bash
+wget -r -np http://45.32.110.58:20101/ -O find_me # --recursive; --no-parent
+grep -ri 'kmactf'  45.32.110.58:20101 # grep pattern của flag
+```
+
+Nhưng không thấy gì, ta dùng dirsearch với default wordlist để bruteforce:
+
+![dir](https://user-images.githubusercontent.com/71699412/174470542-2910d4d5-5376-4d09-a681-de95b41b5155.jpg)
+
+Tìm được thư mục: `/.DS_Store`
+
+![Screenshot (925)](https://user-images.githubusercontent.com/71699412/174470554-7b853aa7-1157-4ef9-abbf-bcf081d9ff21.png)
+
+**flag**: `KMACTF{I wont run away anymore. I wont go back on my word. That is my ninja way! Dattebayo!}`
+
 ## Inject me
 
 **Source**:
