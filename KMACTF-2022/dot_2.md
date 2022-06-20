@@ -80,7 +80,7 @@ SELECT msg FROM ' + query + ' where msg like "MSG-%" and msg not like "%KMACTF{%
 ```
 SQLi sau FROM statement.
 
-![Screenshot (919)](https://user-images.githubusercontent.com/71699412/174470125-c56d26f1-adbd-4513-b025-dc0d7012adf1.png)
+![1](https://user-images.githubusercontent.com/71699412/174515691-eeed6a40-75bb-4a9a-9875-20b1af62b955.png)
 
 Ở đây ta chưa biết table name lẫn column name. Ta có thể dùng kĩ thuật `nested query` để lấy `sql` từ `sqlite_master`. Tuy nhiên, column trả về ở đây buộc phải là `msg` do đó ta alias `sql` thành `msg`.
 
@@ -88,14 +88,14 @@ SQLi sau FROM statement.
 (select sql as msg from sqlite_master)
 ```
 
-![Screenshot (923)](https://user-images.githubusercontent.com/71699412/174470195-49853851-f522-496c-9671-33dae1752c55.png)
+![2](https://user-images.githubusercontent.com/71699412/174515704-c7c8b16a-5c0d-4b3c-8e32-171b69a476c3.png)
 
 Tuy nhiên trả về `No result` là bởi sau `where`, `msg` phải bắt đầu với `MSG-` do đó ta cần thêm prefix là `MSG-`. Ngoài ra, các kí tự như `'` hay `"` bị block nên ta dùng function `char()` để bypass.
 ```
 (select (char(77, 83, 71, 45) || sql) as msg from sqlite_master)
 ```
 
-![Screenshot (921)](https://user-images.githubusercontent.com/71699412/174470203-6564543d-66c2-41b1-8fdb-4bb290500fc5.png)
+![3-1](https://user-images.githubusercontent.com/71699412/174515720-9e5a3be2-a452-4819-ab00-c60ff48459c9.png)
 
 Có column và table ta lấy flag thôi, chú ý tiếp điều kiện `not like "%KMACTF{%"` hay trong result trả về không thể chứa cụm trên, để bypass ta encode result thành hex.
 
@@ -103,7 +103,7 @@ Có column và table ta lấy flag thôi, chú ý tiếp điều kiện `not lik
 (select (char(77, 83, 71, 45) || hex(flag)) as msg from flag)
 ```
 
-![Screenshot (922)](https://user-images.githubusercontent.com/71699412/174470225-b3caf1d9-cc85-48d8-94b4-dae3753db1b5.png)
+![4](https://user-images.githubusercontent.com/71699412/174515738-1e581c1e-a49e-4002-a7fb-7eb3a5b0cd68.png)
 
 **Convert**:
 ```bash
