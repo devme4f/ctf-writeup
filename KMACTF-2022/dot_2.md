@@ -1,7 +1,5 @@
 # KMACTF 2022 dot 2
 
-Thật dễ hiểu khi đọc write up với các step tưởng như logic dễ dàng suy luận ra trong khi thực tế đó còn là nỗi sợ đi sai hướng hay bị đánh lừa đối với người thiếu kinh nghiệm như mình. Nhưng dù sao mỗi thất bại là 1 bài học.
-
 ## Mục lục
 [Find me](#find-me)
 
