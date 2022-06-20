@@ -25,7 +25,7 @@ Nhưng không thấy gì, ta dùng dirsearch với default wordlist để brutef
 
 Tìm được thư mục: `/.DS_Store`
 
-![Screenshot (925)](https://user-images.githubusercontent.com/71699412/174470554-7b853aa7-1157-4ef9-abbf-bcf081d9ff21.png)
+![flag](https://user-images.githubusercontent.com/71699412/174515964-6cf11a29-e65b-4923-b84e-5e83866dcba9.png)
 
 **flag**: `KMACTF{I wont run away anymore. I wont go back on my word. That is my ninja way! Dattebayo!}`
 
@@ -90,14 +90,14 @@ SQLi sau FROM statement.
 
 ![2](https://user-images.githubusercontent.com/71699412/174515704-c7c8b16a-5c0d-4b3c-8e32-171b69a476c3.png)
 
-Tuy nhiên trả về `No result` là bởi sau `where`, `msg` phải bắt đầu với `MSG-` do đó ta cần thêm prefix là `MSG-`. Ngoài ra, các kí tự như `'` hay `"` bị block nên ta dùng function `char()` để bypass.
+Tuy nhiên trả về `No result` là bởi sau điều kiện `where`, result của `msg` phải bắt đầu với `MSG-` do đó ta cần thêm prefix trước result trả về là `MSG-`. Ngoài ra, các kí tự như `'` hay `"` bị block, không viết được chuỗi string nên ta dùng function `char()` để bypass.
 ```
 (select (char(77, 83, 71, 45) || sql) as msg from sqlite_master)
 ```
 
 ![3-1](https://user-images.githubusercontent.com/71699412/174515720-9e5a3be2-a452-4819-ab00-c60ff48459c9.png)
 
-Có column và table ta lấy flag thôi, chú ý tiếp điều kiện `not like "%KMACTF{%"` hay trong result trả về không thể chứa cụm trên, để bypass ta encode result thành hex.
+Có column và table ta lấy flag thôi, chú ý tiếp điều kiện `not like "%KMACTF{%"` hay trong result trả về không thể chứa cụm trên, để bypass ta encode flag thành hex.
 
 ```sql
 (select (char(77, 83, 71, 45) || hex(flag)) as msg from flag)
