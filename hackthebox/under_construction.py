@@ -1,11 +1,9 @@
 import jwt, requests
-import string
 
 /*
   JWT Key Confusion Exploit(RS256 <> HS256) + SQL injection
 */
 
-characters = string.ascii_lowercase + string.digits + ')(, }{_'
 URL = 'http://134.122.104.185:31558/'
 
 with open('public.key', 'r') as f:
