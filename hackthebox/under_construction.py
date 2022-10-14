@@ -1,7 +1,8 @@
 import jwt, requests
 
 /*
-  JWT Key Confusion Exploit(RS256 <> HS256) + SQL injection
+  + JWT Key Confusion Exploit(RS256 <> HS256) + SQL injection
+  + Public Key từ JWT Token server trả về!
 */
 
 URL = 'http://134.122.104.185:31558/'
