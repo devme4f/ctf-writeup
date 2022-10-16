@@ -5,7 +5,7 @@
 Source code: https://drive.google.com/file/d/1wxbVU11RIqD_RTtAcrIQGB82ihAxX06q/view?usp=sharing
 
 ## Review Source Code
-Sau khi giải nén mình được 1 file jar + các file đi kèm để build docker. 
+Sau khi giải nén mình được 1 file jar + nginx.conf + docker file. 
 
 Đọc file Docker thì có thể thấy mình cần RCE và thực thi file `/readflag` thì mới có thể đọc flag, file jar thì chạy jdk 11. Server này cũng nằm sau 1 nginx proxy firewall với các rule check, mình sẽ phân tính kĩ hơn ở sau.
 
