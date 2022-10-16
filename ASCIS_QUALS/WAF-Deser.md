@@ -5,7 +5,10 @@
 Source code: https://drive.google.com/file/d/1wxbVU11RIqD_RTtAcrIQGB82ihAxX06q/view?usp=sharing
 
 ## Review Source Code
-Sau khi giải nén mình được 1 file jar + các file đi kèm để build docker. Đọc file Docker thì có thể thấy mình cần RCE và thực thi file `/readflag` thì mới có thể đọc flag. Server này cũng nằm sau 1 nginx proxy firewall với các rule check, mình sẽ phân tính kĩ hơn ở sau.
+Sau khi giải nén mình được 1 file jar + các file đi kèm để build docker. 
+
+Đọc file Docker thì có thể thấy mình cần RCE và thực thi file `/readflag` thì mới có thể đọc flag, file jar thì chạy jdk 11. Server này cũng nằm sau 1 nginx proxy firewall với các rule check, mình sẽ phân tính kĩ hơn ở sau.
+
 Mở Intellij lên thư mục vừa giải nén và add file `waf-deser-0.0.1-SNAPSHOt.jar` as library, bằng cách này ta có thể xem được source code java mà không cần phải decompile ra.
 
 <img width="340" alt="11_17_18-" src="https://user-images.githubusercontent.com/71699412/196037462-2ac5d487-61f6-43d1-9a02-80077dc9cb7c.png">
