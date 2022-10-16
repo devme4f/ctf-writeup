@@ -167,7 +167,7 @@ server {
 
 }
 ```
-`H4sI` là đoạn base64 encode của magic byte + mode compress của file gzip. Mình có ngồi cố sửa byte header để khi base64 encode sẽ khác đi nhằm bypass nhưng không ăn thua cho đến khi mình thử fuzz chèn dấu space vào giữa thì lại bypass được. Ngoài dấu space thì các ký tự còn lại theo mình thử thì nếu khác null hay khác chứ cái + chữ số thì đều có thể bypass được - chưa hiểu tại sao??
+`H4sI` là đoạn base64 encode của magic byte + mode compress của file gzip. Mình có ngồi cố sửa byte header để khi base64 encode sẽ khác đi nhằm bypass nhưng không ăn thua cho đến khi mình thử fuzz chèn dấu space vào giữa thì lại bypass được. Ngoài dấu space thì các ký tự còn lại theo mình thử thì nếu khác null hay khác chứ cái + chữ số thì đều có thể bypass được - chưa hiểu tại sao không gây lỗi khi nạp gzip??
 
 Ở đây firewall cũng check uri size chỉ được phép bé hơn 3000 bytes nhưng khi compress và base64 encode payload mình không gặp vấn đề nào về size limit dù ở đây không có size limit thì vẫn phải gzip payload lại để không bị lỗi.
 
