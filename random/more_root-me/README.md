@@ -1,1 +1,0 @@
-# root-me solve scripts
